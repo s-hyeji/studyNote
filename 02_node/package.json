@@ -1,0 +1,16 @@
+{
+  "name": "02_node",
+  "version": "1.0.0",
+  "main": "ex01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "randomcolor": "^0.6.2"
+  }
+}
