@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글자 분리 병합</title>
+</head>
+
+<body>
+  <button id="btn">안녕하세요</button>
+  <div id="output"></div>
+</body>
+<script>
+  const btn = document.getElementById("btn");
+  const output = document.getElementById("output");
+
+  btn.addEventListener("click", () => {
+    const text = btn.innerText; // 버튼의 텍스트 가져오기
+    output.innerHTML = ""; // 기존 내용 초기화
+    typeEffect(separateKorean(text), output, 150, () => {
+      console.log("끝"); // 타이핑이 끝나면 "끝" 출력
+    });
+  });
+
+  function separateKorean(text) {
+    const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+    const JUNG = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+    const JONG = [
+      "", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ",
+      "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+    ]; // 종성 배열 수정
+
+    let steps = [];
+    let currentText = "";
+
+    for (let char of text) {
+      const code = char.charCodeAt(0);
+      if (code >= 0xAC00 && code <= 0xD7A3) { // 한글 범위
+        const index = code - 0xAC00;
+        const cho = CHO[Math.floor(index / 588)];
+        const jung = JUNG[Math.floor((index % 588) / 28)];
+        const jong = JONG[index % 28]; // 종성 배열 적용
+
+        // 초성 추가
+        currentText += cho;
+        steps.push(currentText);
+        // 중성 추가
+        currentText = currentText.slice(0, -1) + String.fromCharCode(0xAC00 + (CHO.indexOf(cho) * 588) + (JUNG.indexOf(jung) * 28));
+        steps.push(currentText);
+        // 종성이 있다면 추가
+        if (jong) {
+          currentText = currentText.slice(0, -1) + String.fromCharCode(0xAC00 + (CHO.indexOf(cho) * 588) + (JUNG.indexOf(jung) * 28) + JONG.indexOf(jong));
+          steps.push(currentText);
+        }
+      } else {
+        currentText += char; // 한글이 아니면 그대로 추가
+        steps.push(currentText);
+      }
+    }
+
+    return steps;
+  }
+
+  function typeEffect(steps, element, delay = 150, callback = null) {
+    let i = 0;
+
+    function type() {
+      if (i < steps.length) {
+        element.innerHTML = steps[i]; // 현재 단계의 문자열을 출력
+        i++;
+        setTimeout(type, delay);
+      } else {
+        if (callback) callback(); // 타이핑이 끝나면 콜백 실행
+      }
+    }
+
+    type();
+  }
+</script>
+
+</html>
