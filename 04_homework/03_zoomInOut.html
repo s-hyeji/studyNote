@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>줌인아웃 연습</title>
+  <link rel="stylesheet" href="./css/03_03_zoomInOut.css">
+  <link rel="stylesheet" href="./css/reset.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="controls">
+      <button id="zoom-out">−</button>
+      <div id="zoom-bar-container">
+        <div id="zoom-bar"></div>
+      </div>
+      <button id="zoom-in">+</button>
+    </div>
+    <div id="zoom-target">드래그 가능</div>
+  </div>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const zoomElement = document.getElementById("zoom-target");
+      const zoomBar = document.getElementById("zoom-bar");
+      let scale = 1;
+      const scaleStep = 0.1;
+      const maxScale = 3;
+      const minScale = 0.5;
+      let isDragging = false;
+      let startX, startY, translateX = 0, translateY = 0;
+
+      document.getElementById("zoom-in").addEventListener("click", function () {
+        if (scale < maxScale) {
+          scale += scaleStep;
+          updateTransform();
+          updateZoomBar();
+        }
+      });
+
+      document.getElementById("zoom-out").addEventListener("click", function () {
+        if (scale > minScale) {
+          scale -= scaleStep;
+          updateTransform();
+          updateZoomBar();
+        }
+      });
+
+      zoomElement.addEventListener("mousedown", function (event) {
+        isDragging = true;
+        startX = event.clientX - translateX;
+        startY = event.clientY - translateY;
+        zoomElement.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mousemove", function (event) {
+        if (!isDragging) return;
+        translateX = event.clientX - startX;
+        translateY = event.clientY - startY;
+        updateTransform();
+      });
+
+      document.addEventListener("mouseup", function () {
+        isDragging = false;
+        zoomElement.style.cursor = "grab";
+      });
+
+      function updateTransform() {
+        zoomElement.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+      }
+
+      function updateZoomBar() {
+        const progress = ((scale - minScale) / (maxScale - minScale)) * 100;
+        zoomBar.style.width = `${progress}%`;
+      }
+
+      zoomElement.style.cursor = "grab";
+      updateZoomBar();
+    });
+
+
+  </script>
+</body>
+
+</html>
