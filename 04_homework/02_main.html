@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>연습장 일단</title>
+ <style>
+  .path {
+   width: 100px;
+   height: 100px;
+   background-color: blue;
+  }
+
+  .path.on {
+   animation: clip 3s infinite;
+  }
+
+  @keyframes clip {
+   0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+   }
+
+   100% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+
+   }
+  }
+ </style>
+</head>
+
+<body>
+ <div class="path on"></div>
+</body>
+
+</html>
