@@ -1,0 +1,289 @@
+#wrap {
+ width: 1000px;
+ height: 100vh;
+ padding: 20px;
+ margin-inline: auto;
+ background-color: rgb(243, 242, 242);
+}
+
+.pointN {
+ pointer-events: none !important;
+}
+
+.rouletteContainer {
+ position: relative;
+ width: 584px;
+ height: 584px;
+ margin-inline: auto;
+ margin-block-start: 30px;
+
+ &::after {
+  content: "";
+  position: absolute;
+  top: 246px;
+  left: 270px;
+  width: 80px;
+  height: 80px;
+  background: url(../images/05_roulette/arrow.svg)center/contain no-repeat;
+ }
+
+ &>* {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+
+  &>* {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+  }
+
+  .shadow {
+   box-shadow: -3px -3px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .roulette {
+   font-size: 25px;
+   text-align: center;
+   font-weight: bold;
+
+   &>* {
+    position: absolute;
+   }
+
+   input {
+    height: 60px;
+    background-color: transparent;
+    border: 0;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    /* background-image: url(../images/05_roulette/pancle.svg);
+    background-size: 20px auto;
+    background-repeat: no-repeat; */
+    z-index: 10;
+   }
+
+   input:not(:placeholder-shown) {
+    /* background-image: none; */
+   }
+
+   input::placeholder {
+    color: #00000024
+   }
+  }
+ }
+
+ .roulette_yellow {
+  width: 100%;
+  height: 100%;
+
+  .roulette {
+   outline: 3px solid #FEE19C;
+   background: url(../images/05_roulette/yellow.svg)center/cover no-repeat;
+
+   p:nth-child(1) {
+    top: -1px;
+    left: 278px;
+   }
+
+   p:nth-child(2) {
+    top: 176px;
+    right: 20px;
+    rotate: 75deg;
+   }
+
+   p:nth-child(3) {
+    top: 330px;
+    right: 35px;
+    rotate: 110deg;
+   }
+
+   p:nth-child(4) {
+    top: 442px;
+    left: 104px;
+    rotate: -141deg;
+   }
+
+   p:nth-child(5) {
+    top: 158px;
+    left: 25px;
+    rotate: -70deg;
+   }
+
+   input {
+    width: 110px;
+   }
+
+   input:nth-child(6) {
+    top: 63px;
+    left: 382px;
+    rotate: 37deg;
+   }
+
+   input:nth-child(7) {
+    top: 468px;
+    right: 98px;
+    rotate: 149deg;
+   }
+
+   input:nth-child(8) {
+    top: 506px;
+    right: 244px;
+    rotate: 180deg;
+   }
+
+   input:nth-child(9) {
+    top: 332px;
+    left: -1px;
+    rotate: -111deg;
+   }
+
+   input:nth-child(10) {
+    top: 50px;
+    left: 100px;
+    rotate: -34deg;
+   }
+  }
+ }
+
+ .roulette_green {
+  width: 70%;
+  height: 70%;
+
+  .roulette {
+   background: url(../images/05_roulette/green.svg)center/contain no-repeat;
+
+   p:nth-child(1) {
+    top: -1px;
+    left: 186px;
+   }
+
+   p:nth-child(2) {
+    top: 111px;
+    right: 24px;
+    rotate: 75deg;
+   }
+
+   p:nth-child(3) {
+    top: 216px;
+    right: 29px;
+    rotate: 111deg;
+   }
+
+   p:nth-child(4) {
+    top: 322px;
+    left: 175px;
+    rotate: 181deg;
+   }
+
+   p:nth-child(5) {
+    top: 289px;
+    left: 80px;
+    rotate: -140deg;
+   }
+
+   p:nth-child(6) {
+    top: 104px;
+    left: 37px;
+    rotate: -71deg;
+   }
+  }
+ }
+
+
+ .roulette_blue {
+  width: 40%;
+  height: 40%;
+
+  .roulette {
+   line-height: 1.1;
+   font-size: 22px;
+   color: #fff;
+   background: url(../images/05_roulette/blue.svg)center/contain no-repeat;
+
+   p:nth-child(1) {
+    top: -11px;
+    left: 98px;
+   }
+
+   p:nth-child(2) {
+    top: 46px;
+    right: 5px;
+    rotate: 72deg;
+   }
+
+   p:nth-child(3) {
+    top: 141px;
+    right: 38px;
+    rotate: 144deg;
+   }
+
+   p:nth-child(4) {
+    top: 148px;
+    left: 31px;
+    rotate: 220deg;
+   }
+
+   p:nth-child(5) {
+    top: 54px;
+    left: 13px;
+    rotate: -70deg;
+   }
+  }
+ }
+
+}
+
+
+.spin {
+ animation: spin 1.5s linear infinite
+}
+
+.btnContainer {
+ display: flex;
+ gap: 20px;
+ width: 100%;
+ justify-content: center;
+
+ button {
+  width: fit-content;
+  height: 50px;
+  padding: 0 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(243, 182, 182);
+  cursor: pointer;
+
+  &:hover {
+   background-color: rgb(243, 182, 182);
+  }
+
+  &#onOff::after {
+   content: "ON";
+  }
+
+  &#onOff.done::after {
+   content: "OFF";
+  }
+
+  &#auto::after {
+   content: "3초 후 종료";
+  }
+ }
+}
+
+
+@keyframes spin {
+ 0% {
+  transform: rotate(0deg);
+ }
+
+ 100% {
+  transform: rotate(360deg);
+ }
+}
