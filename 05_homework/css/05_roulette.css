@@ -1,5 +1,5 @@
 #wrap {
- width: 1000px;
+ width: 90%;
  height: 100vh;
  padding: 20px;
  margin-inline: auto;
@@ -263,15 +263,15 @@
    background-color: rgb(243, 182, 182);
   }
 
-  &#onOff::after {
+  &.onOff::after {
    content: "ON";
   }
 
-  &#onOff.done::after {
+  &.onOff.done::after {
    content: "OFF";
   }
 
-  &#auto::after {
+  &.auto::after {
    content: "3초 후 종료";
   }
  }
