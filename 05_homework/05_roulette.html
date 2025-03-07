@@ -66,7 +66,7 @@
   // 속도 바꾸고 랜덤으로 할 떄 쓰자 
   let randomNumbers = [];
   for (let i = 0; i < 3; i++) {
-   let randomNum = (Math.random() * 2 + 1).toFixed(2);
+   let randomNum = (Math.random()).toFixed(2);
    randomNumbers.push(parseFloat(randomNum));
   };
   console.log(randomNumbers);
@@ -76,9 +76,9 @@
     if (!this.classList.contains('done')) {
      this.classList.add("done");
 
-     ROULETTES[0].style.animation = "spin 0.8s linear infinite";
-     ROULETTES[1].style.animation = "spin 0.6s linear infinite";
-     ROULETTES[2].style.animation = "spin 0.2s linear infinite";
+     ROULETTES[0].style.animation = `spin ${randomNumbers[0] + "s"} linear infinite`;
+     ROULETTES[1].style.animation = `spin ${randomNumbers[1] + "s"} linear infinite`;
+     ROULETTES[2].style.animation = `spin ${randomNumbers[2] + "s"} linear infinite`;
      start();
 
      if (this.classList.contains('auto')) {
