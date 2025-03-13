@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+
+<body>
+ <div class="blankBox"></div>
+ <script>
+  function boxes() {
+   let blanks = [];
+   // 
+   for (let i = 0; i < 3; i++) {
+    let blank = document.createElement("div");
+    blank.classList.add("blank");
+
+    let answer = document.createElement("div");
+    answer.classList.add("answer");
+    answer.setAttribute("data-target", i + 1);
+
+    blank.appendChild(answer);
+    blanks.push(blank);
+   }
+
+   return blanks;
+  }
+  const blankBox = document.querySelector(".blankBox");
+  let boxIn = boxes();
+  console.log(boxIn);
+
+  boxIn.forEach(box => {
+   blankBox.appendChild(box)
+  })
+ </script>
+</body>
+
+</html>

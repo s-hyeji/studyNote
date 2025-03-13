@@ -24,7 +24,7 @@
   left: 270px;
   width: 80px;
   height: 80px;
-  background: url(../images/05_roulette/arrow.svg)center/contain no-repeat;
+  background: url(../images/03_roulette/arrow.svg)center/contain no-repeat;
  }
 
  &>* {
@@ -61,7 +61,7 @@
     font-size: 25px;
     font-weight: bold;
     text-align: center;
-    /* background-image: url(../images/05_roulette/pancle.svg);
+    /* background-image: url(../images/03_roulette/pancle.svg);
     background-size: 20px auto;
     background-repeat: no-repeat; */
     z-index: 10;
@@ -83,7 +83,7 @@
 
   .roulette {
    outline: 3px solid #FEE19C;
-   background: url(../images/05_roulette/yellow.svg)center/cover no-repeat;
+   background: url(../images/03_roulette/yellow.svg)center/cover no-repeat;
 
    p:nth-child(1) {
     top: -1px;
@@ -155,7 +155,7 @@
   height: 70%;
 
   .roulette {
-   background: url(../images/05_roulette/green.svg)center/contain no-repeat;
+   background: url(../images/03_roulette/green.svg)center/contain no-repeat;
 
    p:nth-child(1) {
     top: -1px;
@@ -203,7 +203,7 @@
    line-height: 1.1;
    font-size: 22px;
    color: #fff;
-   background: url(../images/05_roulette/blue.svg)center/contain no-repeat;
+   background: url(../images/03_roulette/blue.svg)center/contain no-repeat;
 
    p:nth-child(1) {
     top: -11px;
