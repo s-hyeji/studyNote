@@ -2,9 +2,22 @@ import * as THREE from "three";
 
 export default function printTree() {
  // 나무
+ const loader = new THREE.TextureLoader();
+ const baseColor = loader.load('./images/wood_basecolor.jpg');
+ const normal = loader.load('./images/wood_normal.jpg');
+ const rough = loader.load('./images/wood_roughness.jpg');
+ const height = loader.load('./images/wood_height.png');
+ const leafTexture = loader.load('./images/leaf_texture.png');
+
+ baseColor.colorSpace = THREE.SRGBColorSpace;
+ rough.colorSpace = THREE.SRGBColorSpace;
+
  const trunk = new THREE.Group();
  const trunkMaterial = new THREE.MeshStandardMaterial({
-  color: 0xa38049
+  color: 0xa38049,
+  map: baseColor,
+  normalMap: normal,
+  noughnessMap: rough,
  });
  const trunkGeometry = new THREE.CylinderGeometry(0.8, 1, 1.5);
  const trunk1 = new THREE.Mesh(trunkGeometry, trunkMaterial);
@@ -26,7 +39,9 @@ export default function printTree() {
  const leaf = new THREE.Group();
  const leafMaterial = new THREE.MeshStandardMaterial({
   color: 0x84ad88,
-  side: THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: leafTexture,
+  transparent: true
  });
  const leafGeometry = new THREE.SphereGeometry(2, 32, 16, Math.PI / 3, Math.PI / 3)
  const leaf1 = new THREE.Mesh(leafGeometry, leafMaterial)

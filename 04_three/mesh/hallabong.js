@@ -3,9 +3,20 @@ import * as THREE from "three";
 
 export default function printHallabong() {
  // 한라봉
+ const loader = new THREE.TextureLoader();
+ const baseColor = loader.load('./images/orange_CoLoR.jpg');
+ const normal = loader.load('./images/orange_NoRM.jpg');
+ const rough = loader.load('./images/orange_RoUGH.jpg');
+ baseColor.colorSpace = THREE.SRGBColorSpace;
+ rough.colorSpace = THREE.SRGBColorSpace;
+
  const hallabong = new THREE.Group();
  const hallabongMaterial = new THREE.MeshStandardMaterial({
-  color: 0xff7f00,
+  color: 0xffb48c,
+  map: baseColor,
+  normalMap: normal,
+  roughness: 0.2,
+  noughnessMap: rough
   // wireframe: true,
  });
  const bottomGeometry = new THREE.DodecahedronGeometry(2, 1);
@@ -24,7 +35,8 @@ export default function printHallabong() {
 
  const hallabongleafGeometry = new THREE.SphereGeometry(0.5, 32, 16, 0, Math.PI / 3)
  const hallabongleaf = new THREE.Mesh(hallabongleafGeometry, hallabongleafMaterial);
- hallabongleaf.position.set(0, 3, 0);
+ hallabongleaf.position.set(-0.5, 2.4, -0.1);
+ hallabongleaf.rotation.z = Math.PI / -2;
  hallabong.add(bottom, top, stem, hallabongleaf);
 
 
