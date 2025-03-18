@@ -3,6 +3,7 @@ import { OrbitControls } from "OrbitControls";
 import printTree from "../mesh/tree.js";
 import printHallabong from "../mesh/hallabong.js";
 import printMountain from "../mesh/mountain.js";
+import printStone from "../mesh/stone.js";
 
 
 const scene = new THREE.Scene();
@@ -26,16 +27,22 @@ scene.add(directionalLight, ambientLight);
 const tree1 = printTree();
 const hallabong1 = printHallabong();
 const mountain = printMountain();
-scene.add(tree1, hallabong1, mountain);
+const stone = printStone();
+scene.add(tree1, hallabong1, mountain, stone);
 
 hallabong1.position.x = -5;
 tree1.position.x = 5;
+tree1.position.y = 0;
 
 
 // 카메라 컨트룰러
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.autoRotateSpeed = -10;
 controls.enableDamping = true;
+
+// 축 추가
+const axex = new THREE.AxesHelper(10);
+scene.add(axex);
 
 function animate() {
  controls.update();
