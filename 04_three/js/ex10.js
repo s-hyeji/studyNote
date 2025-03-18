@@ -33,7 +33,7 @@ scene.add(tree1, hallabong1, mountain, stone);
 hallabong1.position.x = -5;
 tree1.position.x = 5;
 tree1.position.y = 0;
-
+stone.position.x = 10;
 
 // 카메라 컨트룰러
 const controls = new OrbitControls(camera, renderer.domElement);
