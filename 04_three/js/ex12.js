@@ -18,6 +18,7 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(3, 3, 3);
 scene.add(directionalLight);
 
+// 외부 3d모델 불러오기
 const loader = new GLTFLoader();
 loader.load("./models/shiba.glb", (gltf) => {
  console.log(gltf);
