@@ -25,7 +25,7 @@
 
   // - charAt: 문자열에서 지정한 위치의 문자를 반환
   const charAt = text.charAt(0);
-  console.log("charAt:", charAt);
+  // console.log("charAt:", charAt);
 
   // - startsWith: 문자열이 지정한 값으로 시작하는지 확인
   // - endsWith: 문자열이 지정한 값으로 끝나는지 확인
@@ -42,7 +42,7 @@
   // 자르기 및 구분하기: slice(), split()
   // - slice: 문자열을 지정한 위치에서 잘라서 반환
   const slice = text.slice(0, 5);
-  console.log("slice:", slice);
+  // console.log("slice:", slice);
 
   // - split: 문자열을 지정한 값으로 구분하여 배열로 반환
   const split = text.split(" ");
@@ -104,7 +104,7 @@
   // console.log("filter:", filteredArr);
   // 응용 - 1
   const filteredArr1 = arr2.filter(item => item.startsWith('num_')).map(item => item.split('_')[1]);
-  // console.log("filter:", filteredArr1);
+  console.log("filter:", filteredArr1);
 
   // - find : 조건에 맞는 첫 번째 요소 반환
   const foundItem1 = arr2.find(item => item.startsWith("num_"));

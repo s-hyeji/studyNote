@@ -259,8 +259,16 @@
   border: 1px solid rgb(243, 182, 182);
   cursor: pointer;
 
-  &:hover {
+  /* &:hover {
    background-color: rgb(243, 182, 182);
+  } */
+
+  &.btn_on::after {
+   content: "ON";
+  }
+
+  &.btn_off::after {
+   content: "OFF";
   }
 
   &.onOff::after {

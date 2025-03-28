@@ -12,8 +12,9 @@
  <div id="wrap">
 
   <div class="btnContainer">
-   <button class="onOff"></button>
-   <button class="auto"></button>
+   <button class="btn_on"></button>
+   <button class="btn_off"></button>
+   <!-- <button class="auto"></button> -->
   </div>
   <div class="rouletteContainer">
    <div class="roulette_yellow ">
@@ -61,56 +62,60 @@
  </div>
  <script type="text/javascript">
   const ROULETTES = document.querySelectorAll('.rouletteContainer .roulette');
-  const btns = document.querySelectorAll('.btnContainer > button');
+  const ON = document.querySelector('.btn_on');
+  const OFF = document.querySelector('.btn_off');
 
-  // 속도 바꾸고 랜덤으로 할 떄 쓰자 
+  let spinning = false;
+  let intervals = [];
+  let current = [0, 0, 0];
+
   let randomNumbers = [];
   for (let i = 0; i < 3; i++) {
-   let randomNum = (Math.random()).toFixed(2);
-   randomNumbers.push(parseFloat(randomNum));
-  };
-  console.log(randomNumbers);
-  // 랜덤 숫자를 갯수로,,
-  // 
-  btns.forEach(function (btn) {
-   btn.addEventListener("click", function () {
-    if (!this.classList.contains('done')) {
-     this.classList.add("done");
-     // 트랜스폼으로 돌리고, 로테이트 값을 360 / 갯수 = 
-     ROULETTES[0].style.animation = `spin ${randomNumbers[0] + "s"} linear infinite`;
-     ROULETTES[1].style.animation = `spin ${randomNumbers[1] + "s"} linear infinite`;
-     ROULETTES[2].style.animation = `spin ${randomNumbers[2] + "s"} linear infinite`;
-     start();
+   let randomNum = Math.floor(Math.random() * (20 - 10)) + 10;
+   randomNumbers.push(randomNum);
+  }
+  console.log("램숫:", randomNumbers);
 
-     if (this.classList.contains('auto')) {
-      this.classList.add("pointN");
-
-      setTimeout(() => {
-       this.classList.remove("pointN", "done");
-       stop()
-
-      }, 3000);
-     }
-
-    } else {
-     this.classList.remove("done");
-     stop();
-    };
+  // 돌리기 --
+  ON.addEventListener("click", function () {
+   if (spinning) return;
+   spinning = true;
+   // 
+   ON.disabled = true;
+   OFF.disabled = false;
+   // 
+   ROULETTES.forEach((roulette, i) => {
+    intervals[i] = setInterval(() => {
+     current[i] += randomNumbers[i];
+     roulette.style.transform = `rotate(${current[i]}deg)`;
+    }, 20);
+   });
+  });
+  // 노랑,그린 10칸 파랑 5칸
+  const angles = [36, 36, 72];
+  let newAngles = [];
+  // 멈추기 --
+  OFF.addEventListener('click', () => {
+   if (!spinning) return;
+   spinning = false;
+   // 
+   ON.disabled = false;
+   OFF.disabled = true;
+   // 
+   console.log("현각:", current);
+   // 
+   newAngles = current.map((value, i) => {
+    const multiple = Math.ceil(value / angles[i]);  // current[i]를 angles[i]로 나누어 올림값을 구함
+    return multiple * angles[i];  // 그 값에 angles[i]를 곱해 새로운 배수를 만듦
+   });
+   console.log("현각에서 배수 값:", newAngles);
+   // 
+   ROULETTES.forEach((roulette, i) => {
+    clearInterval(intervals[i]);
+    roulette.style.transform = `rotate(${newAngles[i]}deg)`;
    });
   });
 
-
-
-  function start() {
-   ROULETTES.forEach(roulette => {
-    roulette.style.animationPlayState = "running";
-   });
-  }
-  function stop() {
-   ROULETTES.forEach(roulette => {
-    roulette.style.animationPlayState = "paused";
-   });
-  }
  </script>
 </body>
 

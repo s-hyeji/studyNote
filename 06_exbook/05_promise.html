@@ -2,72 +2,76 @@
 <html lang="ko">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>프로미스 연습</title>
- <style>
-  .examBox {
-   width: 100px;
-   height: 100px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로미스 연습</title>
+  <style>
+    body {
+      background-color: #000;
+    }
 
-  .examBox.on {
-   background-color: red;
-  }
- </style>
+    .examBox {
+      width: 100px;
+      height: 100px;
+    }
+
+    .examBox.on {
+      background-color: red;
+    }
+  </style>
 </head>
 
 <body>
- <div class="examBox"></div>
- <script>
+  <div class="examBox"></div>
+  <script>
 
-  // 깔끔한 비동기 코드 (셋타임아웃 활용)
-  function delay(ms) {
-   return new Promise(resolve => setTimeout(resolve, ms));
-  }
+    // 깔끔한 비동기 코드 (셋타임아웃 활용)
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-  async function runAnimation() {
-   await delay(2000);
-   console.log("2초 뒤에 실행");
+    async function runAnimation() {
+      await delay(2000);
+      console.log("2초 뒤에 실행");
 
-   await delay(1000);
-   console.log("1초 뒤에 실행");
+      await delay(1000);
+      console.log("1초 뒤에 실행");
 
-   await delay(1000);
-   console.log("1초 뒤에 실행");
-  }
+      await delay(1000);
+      console.log("1초 뒤에 실행");
+    }
 
-  runAnimation();
+    runAnimation();
 
-  // 
-  function fetchData() {
-   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-     const success = Math.random() > 0.3; // 70% 확률로 성공, 30% 확률로 실패
-     if (success) {
-      // resolve({ data: "서버에서 받은 데이터 📦" });
-      resolve();
+    // 
+    function fetchData() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const success = Math.random() > 0.3; // 70% 확률로 성공, 30% 확률로 실패
+          if (success) {
+            // resolve({ data: "서버에서 받은 데이터 📦" });
+            resolve();
 
-     } else {
-      reject("데이터 가져오기 실패 ❌");
-     }
-    }, 2000);
-   });
-  }
+          } else {
+            reject("데이터 가져오기 실패 ❌");
+          }
+        }, 2000);
+      });
+    }
 
-  fetchData()
-   .then(response => {
-    console.log("✅ 성공:");
-    document.querySelector(".examBox").classList.add("on")
+    fetchData()
+      .then(response => {
+        console.log("✅ 성공:");
+        document.querySelector(".examBox").classList.add("on")
 
-   })
-   .catch(error => {
-    console.error("❌ 에러 발생:", error);
-   })
-   .finally(() => {
-    console.log("🎬 요청 완료 (성공/실패 관계없이 실행됨)");
-   });
- </script>
+      })
+      .catch(error => {
+        console.error("❌ 에러 발생:", error);
+      })
+      .finally(() => {
+        console.log("🎬 요청 완료 (성공/실패 관계없이 실행됨)");
+      });
+  </script>
 </body>
 
 </html>
