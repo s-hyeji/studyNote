@@ -67,5 +67,13 @@ export default function printTree() {
  leaf.position.x = -0.4;
  leaf.rotation.z = THREE.MathUtils.degToRad(-10);
 
+ for (const mesh of trunk.children) {
+  mesh.castShadow = true
+ }
+ for (const mesh of leaf.children) {
+  mesh.castShadow = true
+
+ }
+
  return tree;
 };
