@@ -1,0 +1,114 @@
+#wrap {
+ position: relative;
+ width: 1260px;
+ height: 720px;
+ margin: 0 auto;
+ outline: 1px solid;
+ overflow: hidden;
+}
+
+.lineguide {
+ width: fit-content;
+ margin: 40px auto;
+
+ li {
+  display: flex;
+  width: fit-content;
+
+  div {
+   width: 70px;
+   height: 70px;
+   outline: 1px solid;
+  }
+ }
+}
+
+/*  */
+.keyContainer {
+ position: absolute;
+ top: 520px;
+ right: 80px;
+ display: grid;
+ grid-template-columns: repeat(3, 50px);
+ grid-template-rows: repeat(2, 50px);
+ gap: 5px;
+ width: max-content;
+ margin: 20px auto;
+}
+
+.keyContainer div {
+ width: 50px;
+ height: 50px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border: 2px solid #333;
+ background-color: #f8f8f8;
+ border-radius: 8px;
+ font-size: 20px;
+ font-weight: bold;
+ color: #333;
+ user-select: none;
+ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+ transition: all 0.1s ease-in-out;
+
+ cursor: pointer;
+}
+
+.keyContainer div:active {
+ background-color: #ddd;
+ transform: scale(0.95);
+}
+
+/* 방향키 위치 설정 */
+.up {
+ grid-column: 2 / 3;
+ grid-row: 1 / 2;
+}
+
+.left {
+ grid-column: 1 / 3;
+ grid-row: 2 / 2;
+}
+
+.down {
+ grid-column: 2 / 3;
+ grid-row: 2 / 2;
+}
+
+.right {
+ grid-column: 3 / 3;
+ grid-row: 2 / 2;
+}
+
+/* 화살표 모양 추가 */
+.up::before {
+ content: "▲";
+}
+
+.left::before {
+ content: "◀";
+}
+
+.down::before {
+ content: "▼";
+}
+
+.right::before {
+ content: "▶";
+}
+
+.moveBox {
+ position: absolute;
+ width: 70px;
+ transition: top 0.2s ease-in-out, left 0.2s ease-in-out;
+
+ .char {
+  position: relative;
+  top: -35px;
+  left: 10px;
+  width: 50px;
+  height: 100px;
+  background-color: aquamarine;
+ }
+}

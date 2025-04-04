@@ -16,10 +16,10 @@
   const output = document.getElementById("output");
 
   btn.addEventListener("click", () => {
-    const text = btn.innerText; // 버튼의 텍스트 가져오기
-    output.innerHTML = ""; // 기존 내용 초기화
+    const text = btn.innerText;
+    output.innerHTML = "";
     typeEffect(separateKorean(text), output, 150, () => {
-      console.log("끝"); // 타이핑이 끝나면 "끝" 출력
+      console.log("끝"); // 타이핑이 끝나고 나서
     });
   });
 
@@ -42,13 +42,10 @@
         const jung = JUNG[Math.floor((index % 588) / 28)];
         const jong = JONG[index % 28]; // 종성 배열 적용
 
-        // 초성 추가
         currentText += cho;
         steps.push(currentText);
-        // 중성 추가
         currentText = currentText.slice(0, -1) + String.fromCharCode(0xAC00 + (CHO.indexOf(cho) * 588) + (JUNG.indexOf(jung) * 28));
         steps.push(currentText);
-        // 종성이 있다면 추가
         if (jong) {
           currentText = currentText.slice(0, -1) + String.fromCharCode(0xAC00 + (CHO.indexOf(cho) * 588) + (JUNG.indexOf(jung) * 28) + JONG.indexOf(jong));
           steps.push(currentText);
