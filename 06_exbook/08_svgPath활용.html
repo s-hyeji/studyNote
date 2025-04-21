@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>패스활용</title>
+ <link rel="stylesheet" href="./css/08_path.css">
+
+</head>
+
+<body>
+ <div id="wrap">
+  <div class="pathContainer-1">
+   <div class="click-stroke active" data-index="1"></div>
+   <div class="click-stroke" data-index="2"></div>
+   <div class="click-stroke" data-index="3"></div>
+   <div class="click-stroke" data-index="4"></div>
+   <div class="click-stroke" data-index="5"></div>
+   <div class="click-stroke" data-index="6"></div>
+   <div class="click-stroke" data-index="7"></div>
+  </div>
+ </div>
+
+ <script>
+  // 방법 1
+  const clickStrokes = document.querySelectorAll(".click-stroke");
+
+  clickStrokes.forEach(function (obj, i) {
+   obj.addEventListener("click", function () {
+    if (this.classList.contains("active")) {
+     this.classList.add("on");
+     this.classList.remove("active");
+     // console.log( this.nextElementSibling);
+     if (this.nextElementSibling) {
+      this.nextElementSibling.classList.add("active");
+     }
+    }
+   })
+  })
+ </script>
+</body>
+
+</html>
