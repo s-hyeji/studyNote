@@ -1,5 +1,4 @@
 import * as THREE from "three";
-const $result = document.querySelector("#result");
 
 // 1. Scene : 화면에서 보여주려는 객체를 담는 공간
 const scene = new THREE.Scene();
@@ -13,11 +12,10 @@ camera.lookAt(0, 0, 0);
 
 // 3. Renderer : Scene+Camera, 화면을 그려주는 역할
 const renderer = new THREE.WebGLRenderer({
- canvas: $result, antialias: true
+ alpha: true
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
-// console.log(renderer);
-// document.body.appendChild(renderer.domElement)
+document.body.appendChild(renderer.domElement)
 
 const light = new THREE.DirectionalLight(0xffffff);
 light.position.set(2, 4, 3);
@@ -35,7 +33,7 @@ const obj1 = new THREE.Mesh(geo1, material);
 // 원뿔
 const geo2 = new THREE.ConeGeometry(0.5, 1, 32);
 const obj2 = new THREE.Mesh(geo2, material);
-// scene.add(obj2);
+scene.add(obj2);
 
 // 원기둥
 const geo3 = new THREE.CylinderGeometry(0.5, 0.8, 1);
@@ -60,7 +58,7 @@ const obj6 = new THREE.Mesh(geo6, material);
 // 큐브
 const geo7 = new THREE.TorusGeometry(1, 0.3);
 const obj7 = new THREE.Mesh(geo7, material);
-scene.add(obj7);
+// scene.add(obj7);
 
 
 function animate() {

@@ -74,11 +74,11 @@ animate();
 
 // 반응형을 위한 함수
 window.addEventListener("resize", () => {
- // 1. 카메라의 종횡비
- camera.aspect = window.innerWidth / window.innerHeight;
- camera.updateProjectionMatrix(); //카메라 업데이트
+ // // 1. 카메라의 종횡비
+ // camera.aspect = window.innerWidth / window.innerHeight;
+ // camera.updateProjectionMatrix(); //카메라 업데이트
 
- // 2. renderer의 크기
- renderer.setSize(window.innerWidth, window.innerHeight);
+ // // 2. renderer의 크기
+ // renderer.setSize(window.innerWidth, window.innerHeight);
 
 });
