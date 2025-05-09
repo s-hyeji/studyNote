@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+
+<body>
+ <script>
+  const log = console.log;
+ </script>
+
+ <script>
+  const produsts = [
+   { name: "반팔티", price: 15000 },
+   { name: "긴팔티", price: 20000 },
+   { name: "핸드폰케이스", price: 15000 },
+   { name: "후드티", price: 30000 },
+   { name: "바지", price: 25000 },
+  ]
+ </script>
+
+ # map
+ <script>
+  const map = (f, iter) => {
+   let res = [];
+   for (const a of iter) {
+    res.push(f(a));
+   }
+
+   return res;
+  };
+  log(map(p => p.price, produsts));
+  // 
+  let names = [];
+  for (const p of produsts) {
+   names.push(p.name);
+  }
+  log(names);
+  //
+  let prices = [];
+  for (const p of produsts) {
+   prices.push(p.price);
+  }
+  // log(prices);
+ </script>
+
+ # 이터러블 플고토콜을 따른 map의 다형성
+ <script></script>
+
+ # filter
+ <script></script>
+
+ # reduce
+ <script></script>
+
+</body>
+
+</html>
