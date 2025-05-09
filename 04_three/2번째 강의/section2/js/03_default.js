@@ -42,11 +42,9 @@ scene.add(boxMesh);
 
 const animete = () => {
     controls.update();
-
     // boxMesh.rotation.z += 0.01;
     // boxMesh.rotation.x += 0.01;
     // boxMesh.rotation.y += 0.01;
-
     camera.lookAt(scene.position);
     //장면의 위치를 바라봄
     camera.updateProjectionMatrix();

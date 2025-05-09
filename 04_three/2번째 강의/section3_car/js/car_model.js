@@ -23,11 +23,11 @@ const init = () => {
     //카메라 컨트롤
     const controls = new OrbitControls(camera, renderer.domElement);
     // {
-    const axes = new THREE.AxesHelper(50);
-    scene.add(axes);
+    // const axes = new THREE.AxesHelper(50);
+    // scene.add(axes);
 
-    //     const gridHelper = new THREE.GridHelper(70, 20);
-    //     scene.add(gridHelper);
+    // const gridHelper = new THREE.GridHelper(70, 20);
+    // scene.add(gridHelper);
     // }
 
     {

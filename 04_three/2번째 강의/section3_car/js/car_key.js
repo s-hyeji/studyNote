@@ -25,12 +25,12 @@ const init = () => {
     //카메라 컨트롤
     controls = new OrbitControls(camera, renderer.domElement);
     controls.minPolarAngle = Math.radians(20);
-    controls.maxPolarAngle = Math.radians(120);
+    controls.maxPolarAngle = Math.radians(100);
     // controls.target.set(0, 10, 0);
     // controls.autoRotate = true;
     // controls.autoRotateSpeed = 1;
     controls.enablePan = false;
-    controls.enableZoom = false;
+    // controls.enableZoom = false;
     controls.enableDamping = true;
     {
         const axes = new THREE.AxesHelper(50);
