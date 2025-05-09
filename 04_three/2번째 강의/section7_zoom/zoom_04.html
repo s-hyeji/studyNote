@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>갤러리 - 링크 새창</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+            #canvasWrap {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+            }
+            .progress {
+                position: fixed;
+                width: 100vw;
+                height: 1px;
+                top: 0;
+                background-color: #666666;
+                z-index: 10;
+            }
+            .bar {
+                position: absolute;
+                width: 0;
+                height: 1px;
+                top: 0;
+                background: yellow;
+                transition: width 0.2s ease-out;
+            }
+        </style>
+        <script src="./js/zoom_04.js" type="module" defer></script>
+    </head>
+    <body>
+        <div class="progress">
+            <span class="bar"></span>
+        </div>
+        <div id="canvasWrap"></div>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>카메라 이동</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            #canvasWrap {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+            button {
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                background-color: black;
+                z-index: 1000;
+                color: #fff;
+                padding: 15px 22px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50px;
+                transition: all 0.2s ease-in-out;
+            }
+            button:hover {
+                background-color: #fff;
+                color: #000;
+            }
+        </style>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+            integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="./js/model_03.js" type="module" defer></script>
+    </head>
+    <body>
+        <div id="canvasWrap"></div>
+        <button type="button">camera move</button>
+    </body>
+</html>

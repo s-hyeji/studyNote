@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>My first three.js app</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            canvas {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="./js/three.js"></script>
+        <script>
+            const scene = new THREE.Scene();
+            //장면 (무대)
+
+            const camera = new THREE.PerspectiveCamera(
+                100,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            //카메라
+
+            const renderer = new THREE.WebGLRenderer();
+            //랜더
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            //장면 사이즈
+
+            document.body.appendChild(renderer.domElement);
+            //body 태그에 넣는다
+
+            const geometry = new THREE.BoxGeometry();
+            //box geometry 생성
+            // const material = new THREE.MeshPhongMaterial({ color: 0x00ff });
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ff });
+            //재질 설정
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            //무대에 큐브 올려놓자.
+
+            camera.position.x = 0;
+            camera.position.y = 1;
+            camera.position.z = 5;
+            //카메라 위치
+
+            // const axes = new THREE.AxesHelper(10);
+            // scene.add(axes);
+            // //x,y,z 축 표시
+
+            // const gridHelper = new THREE.GridHelper(10, 10);
+            // scene.add(gridHelper);
+            // //바닥에 그리드 넣기
+
+            const spotLight = new THREE.SpotLight(0xffffff);
+            spotLight.position.set(1, 2.5, 2.5);
+            scene.add(spotLight);
+            //조명 추가
+
+            // const spotLightHelper = new THREE.SpotLightHelper(spotLight);
+            // scene.add(spotLightHelper);
+
+            // let step = 0;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                //계속 animate 실행시켜줌
+
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+                //계속 값을 변경해줌
+
+                // step += 0.05;
+                // cube.position.y += 0.1 * Math.cos(step);
+                // spotLight.position.y += 0.4 * Math.cos(step);
+
+                renderer.render(scene, camera);
+                //장면을 찍어냄. 찰칵 찰칵
+            }
+
+            animate();
+            //애니메이션 실행
+            //카메라 녹화 버튼을 누른다고 생각하시면 됩니다.
+        </script>
+    </body>
+</html>
