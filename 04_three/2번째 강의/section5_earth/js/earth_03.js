@@ -21,7 +21,7 @@ const init = () => {
 
     //카메라 컨트롤
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 200;
+    controls.minDistance = 200; // 카메라 줌 아웃 설정
     controls.maxDistance = 500;
 
     const axes = new THREE.AxesHelper(150);

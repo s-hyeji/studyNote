@@ -20,7 +20,7 @@ const init = () => {
     //카메라 컨트롤
     controls = new OrbitControls(camera, renderer.domElement);
     controls.minDistance = 200;
-    controls.maxDistance = 400;
+    controls.maxDistance = 300;
     controls.enableDamping = true;
 
     {
