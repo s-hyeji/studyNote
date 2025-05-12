@@ -19,6 +19,7 @@ scene.environment = null;
 const textureLoader = new THREE.TextureLoader();
 const texture = textureLoader.load('./images/small_cathedral_02_4k.png');
 // texture.encoding = THREE.sRGBEncoding;
+texture.colorSpace = THREE.SRGBColorSpace;
 texture.encoding = THREE.LinearEncoding;
 const geometry = new THREE.SphereGeometry(500, 60, 40);
 geometry.scale(-1, 1, 1);
