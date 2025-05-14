@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>구조 분해 할당 연습</title>
+</head>
+
+<body>
+
+ # 기초 이해
+ <script>
+  // 배열 구조 분해
+  const arr = [10, 20, 30];
+  const [a, b, c] = arr;
+  console.log(a, b, c);
+
+  // 객체 구조 분해
+  const person = {
+   name: "혜지",
+   age: 28,
+   job: "developer"
+  };
+
+  const { name, job } = person;
+  console.log(name); // 혜지
+  console.log(job);  // developer
+
+  // 함수 리턴값 구조 분해
+  function getUser() {
+   return {
+    id: 1,
+    username: "heji",
+    email: "heji@example.com"
+   };
+  }
+
+  const { username, email } = getUser();
+  console.log(username); // heji
+  console.log(email);    // heji@example.com
+
+  // 구조 분해 + 새 이름 지정
+  const { username: userId } = getUser();
+  console.log(userId); // heji
+
+  console.clear();
+ </script>
+
+ # 심화
+ <script>
+  function makeBurgerSet(type) {
+   const burger = `${type} 버거`;
+
+   function addFries() {
+    console.log("감자튀김 추가!");
+   }
+
+   function addDrink() {
+    console.log("콜라 추가!");
+   }
+
+   function makeCombo() {
+    console.log(`${burger}, 감자튀김, 콜라 세트 완성!`);
+   }
+
+   return {
+    burger,
+    addFries,
+    addDrink,
+    makeCombo
+   };
+  }
+
+  //  구조분해 X
+  const set = makeBurgerSet("치즈");
+
+  console.log(set.burger); // 치즈 버거
+  set.addFries();          // 감자튀김 추가!
+  set.makeCombo();         // 치즈 버거, 감자튀김, 콜라 세트 완성!
+
+  //  구조분해 O
+  const { burger, addFries, addDrink, makeCombo } = makeBurgerSet("불고기");
+
+  console.log(burger);  // 불고기 버거
+  addFries();           // 감자튀김 추가!
+  addDrink();           // 콜라 추가!
+  makeCombo();          // 불고기 버거, 감자튀김, 콜라 세트 완성!
+
+ </script>
+</body>
+
+</html>
