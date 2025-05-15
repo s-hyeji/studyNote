@@ -1,0 +1,38 @@
+#wrap {
+ position: relative;
+ width: 1280px;
+ height: 720px;
+ margin: 0 auto;
+ outline: 1px solid;
+}
+
+.gameContainer {
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ height: 300px;
+ background-color: #FFE8E2;
+}
+
+.objBox>.obj {
+ position: absolute;
+ top: 50px;
+ left: 0;
+ width: 240px;
+ height: 180px;
+
+ &.obj_1 {
+  transform: translateX(140px);
+  background-color: #CACACA;
+ }
+
+ &.obj_2 {
+  transform: translateX(522px);
+  background-color: #818080;
+ }
+
+ &.obj_3 {
+  transform: translateX(900px);
+  background-color: #474747;
+ }
+}
