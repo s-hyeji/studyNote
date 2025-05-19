@@ -21,13 +21,16 @@
   const str = `abc`;
 
   for (let i = 0; i < list.length; i++) {
-   // log(list[i]);
+   log(list[i]);
   }
   for (let i = 0; i < list.length; i++) {
-   // log(str[i]);
+   log(str[i]);
   }
   for (const li of list) {
-   // log(li);
+   log(li);
+  }
+  for (const [i, li] of list.entries()) {
+   log(i, li);
   }
  </script>
 
@@ -55,7 +58,7 @@
   for (const a of map.keys()) log(a);
   for (const a of map.values()) log(a);
   for (const a of map.entries()) log(a);
-  console.clear();
+  // console.clear();
  </script>
 
  ## 이터러블/이터레이터 프로토콜
@@ -86,7 +89,7 @@
 
  ## 전개 연산자
  <script>
-  console.clear();
+  // console.clear();
   const a = [1, 2];
   log([...a, ...arr, ...set, ...map.keys()]);
 

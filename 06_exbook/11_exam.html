@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>문제</title>
+</head>
+
+<body>
+ # 매개변수와 인자값과 친해지기
+
+
+ 문제 1. sayHi(), sayHi("토브")의 호출 값은?
+ <script>
+  function sayHi(name = "친구") {
+   console.log("안녕, " + name + "!");
+  }
+ </script>
+
+
+ 문제 2. num(6, undefined, 3)로 호출했을 때, 출력 값은 몇일까?
+ <script>
+  function num(a, b = 2, c) {
+   console.log(a + b + c);
+  }
+ </script>
+
+
+ 문제 3. a와 b 각각의 호출 값은?
+ <script>
+  function quiz3(arr, num) {
+   arr.push(num);
+   num = num * 2;
+  }
+
+  const a = [1];
+  let b = 5;
+
+  quiz3(a, b);
+ </script>
+
+</body>
+
+</html>

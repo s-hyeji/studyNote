@@ -1,0 +1,82 @@
+#wrap {
+ position: relative;
+ width: 1280px;
+ height: 720px;
+ margin: 0 auto;
+ outline: 1px solid;
+ overflow: hidden;
+}
+
+.gameContainer {
+ position: absolute;
+ bottom: -40px;
+ left: 50%;
+ transform: translateX(-50%);
+}
+
+.char {
+ position: absolute;
+ top: -330px;
+ left: 50%;
+ width: 375px;
+ height: 462px;
+ background: url(../images/12_anitext/char.svg)center/contain no-repeat;
+ transform: translateX(-50%);
+
+}
+
+.char_hand {
+ position: absolute;
+ top: -114px;
+ left: 263px;
+ width: 103px;
+ height: 129px;
+ background: url(../images/12_anitext/char_hand.svg)center/contain no-repeat;
+ z-index: 5;
+
+ &.run {
+  background-color: red;
+ }
+}
+
+.checkerboard {
+ position: relative;
+ width: 924px;
+ height: 376px;
+ background: url(../images/12_anitext/bg.svg)center/contain no-repeat;
+}
+
+.rack {
+ position: absolute;
+ width: 96px;
+ height: 60px;
+ background: center/contain no-repeat;
+
+ &.default {
+  background-image: url(../images/12_anitext/blackrack.svg);
+  transform: translate(465px, 184px);
+ }
+
+ &.icon_o {
+  background-image: url(../images/12_anitext/icon_o.svg);
+  transform: translate(283px, 60px);
+ }
+
+ &.icon_x {
+  background-image: url(../images/12_anitext/icon_x.svg);
+  transform: translate(550px, 60px);
+ }
+}
+
+button {
+ font-size: 25px;
+ margin-left: 10px;
+ margin-top: 10px;
+
+ cursor: pointer;
+}
+
+.buttonBox:has(.run) {
+ pointer-events: none;
+ opacity: .5;
+}
