@@ -33,9 +33,7 @@
   </div>
  </div>
  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
  <script>
-  gsap.registerPlugin(MotionPathPlugin);
 
   const hand = document.querySelector('.char_hand');
   const rackes = document.querySelectorAll(".rack")
@@ -163,7 +161,7 @@
    tl5.to(rackes[1], {
     x: 655,
     y: 364,
-    duration: 0.4,
+    duration: 0.6,
     onComplete: () => {
      reset();
     }
@@ -179,7 +177,7 @@
    tl5.to(rackes[0], {
     x: 360,
     y: 140,
-    duration: 0.4,
+    duration: 0.6,
     ease: "back.out(1)",
     onComplete: () => {
      reset();
