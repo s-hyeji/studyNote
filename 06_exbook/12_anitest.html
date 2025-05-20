@@ -2,214 +2,214 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>알튕기기 모션 테스트</title>
- <link rel="stylesheet" href="./css/reset.css">
- <link rel="stylesheet" href="./css/12_anitest.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>알튕기기 모션 테스트</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/12_anitest.css">
 </head>
 
 <body>
- <div id="wrap">
-  <div class="buttonBox">
-   <button onclick="mo1()">성공 - 1</button>
-   <button onclick="mo2()">성공 - 2</button>
-   <button onclick="mo3()">오답 - 1</button>
-   <button onclick="mo4()">오답 - 2</button>
-   <button onclick="mo5()">오답 - 3</button>
-   <button onclick="mo6()">오답 - 4</button>
-  </div>
-
-  <div class="gameContainer">
-   <div class="char"></div>
-   <div class="char_hand"></div>
-   <div class="checkerboard">
-    <div class="rackBox">
-     <div class="rack icon_o"></div>
-     <div class="rack icon_x"></div>
+  <div id="wrap">
+    <div class="buttonBox">
+      <button onclick="mo1()">성공 - 1</button>
+      <button onclick="mo2()">성공 - 2</button>
+      <button onclick="mo3()">오답 - 1</button>
+      <button onclick="mo4()">오답 - 2</button>
+      <button onclick="mo5()">오답 - 3</button>
+      <button onclick="mo6()">오답 - 4</button>
     </div>
-    <div class="rack default"></div>
-   </div>
+
+    <div class="gameContainer">
+      <div class="char"></div>
+      <div class="char_hand"></div>
+      <div class="checkerboard">
+        <div class="rackBox">
+          <div class="rack icon_o"></div>
+          <div class="rack icon_x"></div>
+        </div>
+        <div class="rack default"></div>
+      </div>
+    </div>
   </div>
- </div>
- <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
- <script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script>
 
-  const hand = document.querySelector('.char_hand');
-  const rackes = document.querySelectorAll(".rack")
+    const hand = document.querySelector('.char_hand');
+    const rackes = document.querySelectorAll(".rack")
 
-  const defaultPosition = () => {
-   const positions = [];
+    const defaultPosition = () => {
+      const positions = [];
 
-   rackes.forEach((el) => {
-    const style = window.getComputedStyle(el);
-    const transform = style.transform;
+      rackes.forEach((rack) => {
+        const style = window.getComputedStyle(rack);
+        const transform = style.transform;
 
-    if (transform && transform !== 'none') {
-     const match = transform.match(/matrix\(([^)]+)\)/);
-     if (match) {
-      const values = match[1].split(',').map(parseFloat);
-      const x = values[4];
-      const y = values[5];
-      positions.push({ x, y });
-     }
+        if (transform && transform !== 'none') {
+          const match = transform.match(/matrix\(([^)]+)\)/);
+          if (match) {
+            const values = match[1].split(',').map(parseFloat);
+            const x = values[4];
+            const y = values[5];
+            positions.push({ x, y });
+          }
+        }
+      });
+
+      return { positions };
     }
-   });
+    const rackPosition = defaultPosition().positions;
+    console.log(rackPosition);
 
-   return { positions };
-  }
-  const rackPosition = defaultPosition().positions;
-  console.log(rackPosition);
+    // 정답 1
+    const mo1 = () => {
+      console.log("mo1 실행");
+      handMothion()
+      const tl1 = gsap.timeline();
 
-  // 정답 1
-  const mo1 = () => {
-   console.log("mo1 실행");
-   handMothion()
-   const tl1 = gsap.timeline();
+      tl1.to(rackes[0], {
+        x: 417,
+        y: 154,
+        duration: 0.4,
+        ease: "back.out(1)"
+      })
+        .to(rackes[2], {
+          x: 885,
+          y: 364,
+          duration: 0.4,
+          onComplete: () => {
+            reset();
+          }
+        }, 0.15)
 
-   tl1.to(rackes[0], {
-    x: 417,
-    y: 154,
-    duration: 0.4,
-    ease: "back.out(1)"
-   })
-    .to(rackes[2], {
-     x: 885,
-     y: 364,
-     duration: 0.4,
-     onComplete: () => {
-      reset();
-     }
-    }, 0.15)
-
-  }
-  // 정답 2
-  const mo2 = () => {
-   console.log("mo2 실행");
-   handMothion()
-   const tl2 = gsap.timeline();
-
-   tl2.to(rackes[1], {
-    x: 520,
-    y: 152,
-    duration: 0.3,
-    ease: "back.out(1)"
-   })
-    .to(rackes[2], {
-     x: 185,
-     y: 354,
-     duration: 0.3,
-     onComplete: () => {
-      reset();
-     }
-    }, 0.13)
-  }
-  // 오답 1
-  const mo3 = () => {
-   console.log("mo3 실행");
-   handMothion()
-   const tl3 = gsap.timeline();
-
-   tl3.to(rackes[1], {
-    x: 544,
-    y: 200,
-    duration: 0.4,
-    ease: "power2.out",
-   })
-    .to(rackes[2], {
-     x: "+=2",
-     duration: 0.1,
-     repeat: 2,
-     yoyo: true,
-     ease: "power3.inOut"
-    }, 0.07)
-    .to(rackes[1], {
-     x: 885,
-     y: 364,
-     duration: 0.4,
-     onComplete: () => {
-      reset();
-     }
-    }, 0.2)
-
-
-  }
-  // 오답 2
-  const mo4 = () => {
-   console.log("mo4 실행");
-   handMothion()
-   const tl4 = gsap.timeline();
-
-   tl4.to(rackes[0], {
-    x: "+=2",
-    duration: 0.1,
-    repeat: 2,
-    yoyo: true,
-    ease: "power3.inOut",
-    onComplete: () => {
-     reset();
     }
-   })
+    // 정답 2
+    const mo2 = () => {
+      console.log("mo2 실행");
+      handMothion()
+      const tl2 = gsap.timeline();
 
-  }
-  // 오답 3
-  const mo5 = () => {
-   console.log("m05 실행");
-   handMothion()
-   const tl5 = gsap.timeline();
-
-   tl5.to(rackes[1], {
-    x: 655,
-    y: 364,
-    duration: 0.6,
-    onComplete: () => {
-     reset();
+      tl2.to(rackes[1], {
+        x: 520,
+        y: 152,
+        duration: 0.3,
+        ease: "back.out(1)"
+      })
+        .to(rackes[2], {
+          x: 185,
+          y: 354,
+          duration: 0.3,
+          onComplete: () => {
+            reset();
+          }
+        }, 0.13)
     }
-   })
+    // 오답 1
+    const mo3 = () => {
+      console.log("mo3 실행");
+      handMothion()
+      const tl3 = gsap.timeline();
 
-  }
-  // 오답 4
-  const mo6 = () => {
-   console.log("m06 실행");
-   handMothion()
-   const tl5 = gsap.timeline();
+      tl3.to(rackes[1], {
+        x: 544,
+        y: 200,
+        duration: 0.4,
+        ease: "power2.out",
+      })
+        .to(rackes[2], {
+          x: "+=2",
+          duration: 0.1,
+          repeat: 2,
+          yoyo: true,
+          ease: "power3.inOut"
+        }, 0.07)
+        .to(rackes[1], {
+          x: 885,
+          y: 364,
+          duration: 0.4,
+          onComplete: () => {
+            reset();
+          }
+        }, 0.18)
 
-   tl5.to(rackes[0], {
-    x: 360,
-    y: 140,
-    duration: 0.6,
-    ease: "back.out(1)",
-    onComplete: () => {
-     reset();
+
     }
-   })
+    // 오답 2
+    const mo4 = () => {
+      console.log("mo4 실행");
+      handMothion()
+      const tl4 = gsap.timeline();
 
-  }
+      tl4.to(rackes[0], {
+        x: "+=2",
+        duration: 0.1,
+        repeat: 2,
+        yoyo: true,
+        ease: "power3.inOut",
+        onComplete: () => {
+          reset();
+        }
+      })
 
-  // 공통 값 세팅
-  const handMothion = () => {
-   hand.classList.add("run");
+    }
+    // 오답 3
+    const mo5 = () => {
+      console.log("m05 실행");
+      handMothion()
+      const tl5 = gsap.timeline();
 
-   rackes.forEach((el, i) => {
-    const { x, y } = rackPosition[i];
-    gsap.set(el, {
-     x: x,
-     y: y
-    });
-   });
-  }
+      tl5.to(rackes[1], {
+        x: 655,
+        y: 364,
+        duration: 0.6,
+        onComplete: () => {
+          reset();
+        }
+      })
 
-  const reset = () => {
-   setTimeout(() => {
-    hand.classList.remove("run");
+    }
+    // 오답 4
+    const mo6 = () => {
+      console.log("m06 실행");
+      handMothion()
+      const tl5 = gsap.timeline();
 
-    rackes.forEach((rack, i) => {
-     const { x, y } = rackPosition[i];
-     rack.style.transform = `translate(${x}px, ${y}px)`;
-    });
-   }, 1000);
-  }
- </script>
+      tl5.to(rackes[0], {
+        x: 360,
+        y: 140,
+        duration: 0.6,
+        ease: "back.out(1)",
+        onComplete: () => {
+          reset();
+        }
+      })
+
+    }
+
+    // 공통 값 세팅
+    const handMothion = () => {
+      hand.classList.add("run");
+
+      rackes.forEach((el, i) => {
+        const { x, y } = rackPosition[i];
+        gsap.set(el, {
+          x: x,
+          y: y
+        });
+      });
+    }
+
+    const reset = () => {
+      setTimeout(() => {
+        hand.classList.remove("run");
+
+        rackes.forEach((rack, i) => {
+          const { x, y } = rackPosition[i];
+          rack.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      }, 1000);
+    }
+  </script>
 </body>
 
 </html>
