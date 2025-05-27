@@ -32,30 +32,91 @@
 
    return res;
   };
-  log(map(p => p.price, produsts));
+  // log(map(p => p.price, produsts));
   // 
   let names = [];
   for (const p of produsts) {
    names.push(p.name);
   }
   log(names);
+
+  log(map(p => p.name, produsts))
   //
   let prices = [];
   for (const p of produsts) {
    prices.push(p.price);
   }
-  // log(prices);
+  log(prices);
+
+  console.clear();
  </script>
 
  # 이터러블 플고토콜을 따른 map의 다형성
- <script></script>
+ <script>
+  log([1, 2, 3].map(a => a + 1))
+  log(map(el => el.nodeName, document.querySelectorAll("*")))
+
+  function* gen() {
+   yield 2;
+   yield 3;
+   yield 4;
+  }
+  log(map(a => a * a, gen()));
+
+  let m = new Map();
+  m.set("a", 10)
+  m.set("b", 20)
+
+  // const it = m[Symbol.iterator]();
+  log(new Map(map(([k, a]) => [k, a * 2], m)));
+
+  console.clear()
+ </script>
 
  # filter
- <script></script>
+ <script>
+  const filter = (f, iter) => {
+   let res = [];
+   for (const a of iter) {
+    if (f(a)) res.push(a)
+   }
+
+   return res
+  }
+  log(...filter(p => p.price < 20000, produsts))
+  console.clear()
+
+ </script>
 
  # reduce
- <script></script>
+ <script>
+  const nums = [1, 2, 3, 4, 5];
+  let total = 0;
 
+  for (const n of nums) {
+   total = total + n
+  }
+  // log(total)
+
+  const reduce = (f, acc, iter) => {
+   if (!iter) {
+    iter = acc[Symbol.iterator]();
+    acc = iter.next().value;
+   }
+   for (const a of iter) {
+    acc = f(acc, a)
+   }
+
+   return acc;
+  }
+  const add = (a, b) => a + b;
+  log(reduce(add, 0, [1, 2, 3, 4, 5]))
+  log(reduce(add, 1, [2, 3, 4, 5]))
+  log(reduce(add, [1, 2, 3, 4, 5]))
+ </script>
+ <script>
+  log(reduce((total_price, produsts) => total_price + produsts.price, 0, produsts))
+ </script>
 </body>
 
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      const log = console.log;
+   </script>
+   <script src="./index.js"></script>
+   <script>
+      const produsts = [
+         { name: "반팔티", price: 15000 },
+         { name: "긴팔티", price: 20000 },
+         { name: "핸드폰케이스", price: 15000 },
+         { name: "후드티", price: 30000 },
+         { name: "바지", price: 25000 },
+      ]
+   </script>
+   <script>
+      const add = (a, b) => a + b;
+      // log(
+      //  reduce(
+      //   add,
+      //   map(p => p.price, 
+      //    filter(p => p.price < 20000, produsts)))
+      // );
+      log(
+         reduce(
+            add,
+            filter(n => n >= 20000,
+               map(p => p.price, produsts)))
+      );
+      console.clear();
+   </script>
+
+   # 코드를 값으로 다루어 표현력 높이기
+
+   ## go, pipe
+   <!-- console.clear() -->
+   <script>
+      const go = (...args) => reduce((a, f) => f(a), args)
+      const pipe = (f, ...fs) => (...as) => go(f(...a), ...fs);
+
+      const f = pipe(
+         a => a + 1,
+         a => a + 10,
+         a => a + 100,
+      )
+      go(
+         produsts,
+         produsts => filter(p => p.price < 20000, produsts),
+         produsts => map(p => p.price, produsts),
+         prices => reduce(add, prices),
+         log
+      )
+      go(
+         produsts,
+         filter(p => p.price < 20000),
+         map(p => p.price),
+         reduce(add),
+         log
+      )
+
+
+   </script>
+
+   ## cuury
+   <script>
+      // const mult = curry((a, b) => a * b);
+      // log(mult(3)(5))
+   </script>
+
+</html>

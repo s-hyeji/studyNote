@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+
+<body>
+ <script src="./index.js"></script>
+ <script>
+  const log = console.log;
+  const add = (a, b) => a + b;
+  const go = (...args) => reduce((a, f) => f(a), args);
+  const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
+ </script>
+
+ <script>
+  const produsts = [
+   { name: "반팔티", price: 15000 },
+   { name: "긴팔티", price: 20000 },
+   { name: "핸드폰케이스", price: 15000 },
+   { name: "후드티", price: 30000 },
+   { name: "바지", price: 25000 },
+  ]
+ </script>
+
+ # 함수 조합으로 함수 만들기
+ <script>
+  const total_price = pipe(
+   map(p => p.price),
+   reduce(add)
+  )
+  const base_total_price = predi => pipe(
+   filter(predi),
+   total_price
+  )
+  go(
+   produsts,
+   base_total_price(p => p.price < 20000),
+   log
+  )
+ </script>
+
+</html>
