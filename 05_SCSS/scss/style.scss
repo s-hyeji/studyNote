@@ -1,0 +1,19 @@
+body {
+ font-size: 18px;
+ color: #000;
+ line-height: 1.6em;
+}
+
+h1 {
+ font-size: 60px;
+ font-weight: normal;
+ text-align: center;
+
+ span {
+  color: crimson;
+
+  &:hover {
+   color: royalblue;
+  }
+ }
+}
