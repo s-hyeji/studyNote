@@ -1,0 +1,59 @@
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+body {
+  font-family: "Raleway", sans-serif;
+  color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Accordion Navigation */
+.items {
+  list-style: none;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  background-color: #535c68;
+  overflow: hidden;
+}
+.items .close-item {
+  text-align: center;
+  background-color: crimson;
+}
+.items li a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-transform: capitalize;
+}
+.items .main-item > a {
+  position: relative;
+}
+.items .main-item > a::after {
+  content: "\f107";
+  position: absolute;
+  right: 10px;
+  font-family: fontawesome;
+}
+.items .sub-items {
+  max-height: 0px;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.377);
+  background-color: #626e7e;
+  transition: 0.5s;
+}
+.items .sub-items:target {
+  max-height: 500px;
+}
+.items .sub-items a {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.items .sub-items a:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* Google Web Font */
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600&display=swap");
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/*피그마*/
+.figma {
+  width: 200px;
+}
+.figma > span {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Hind", sans-serif;
+  font-weight: 500;
+  color: #222;
+  text-align: center;
+  font-size: 66.6666666667px;
+  letter-spacing: 3px;
+}
+.figma .shape {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.figma .shape > span {
+  width: 100px;
+  height: 100px;
+}
+.figma .shape > span:nth-child(1) {
+  background-color: #F24E1E;
+  border-radius: 50% 0 0 50%;
+}
+.figma .shape > span:nth-child(2) {
+  background-color: #FF7262;
+  border-radius: 0 50% 50% 0;
+}
+.figma .shape > span:nth-child(3) {
+  background-color: #A259FF;
+  border-radius: 50% 0 0 50%;
+}
+.figma .shape > span:nth-child(4) {
+  background-color: #1ABCFE;
+  border-radius: 100%;
+}
+.figma .shape > span:nth-child(5) {
+  background-color: #0ACF83;
+  border-radius: 50% 0 50% 50%;
+}

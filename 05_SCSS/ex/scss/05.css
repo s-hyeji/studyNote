@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #000;
+}
+
+.icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 50px;
+}
+.icons li input[type=checkbox] {
+  display: none;
+}
+.icons li input[type=checkbox]:checked + div {
+  border: none;
+  box-shadow: 0 0 20px rgba(255, 164, 182, 0.5), 0 0 20px rgba(255, 164, 182, 0.5), 0 0 20px rgba(255, 164, 182, 0.5), 0 0 20px rgba(255, 164, 182, 0.5), 0 0 33.3333333333px rgba(255, 164, 182, 0.8), 0 0 33.3333333333px rgba(255, 164, 182, 0.8), 0 0 40px rgba(255, 164, 182, 0.8), inset 0 0 6.00060006px rgb(255, 164, 182);
+}
+.icons li input[type=checkbox]:checked + div span {
+  text-shadow: 0 0 20px rgb(255, 164, 182), 0 0 20px rgb(255, 164, 182), 0 0 20px rgb(255, 164, 182), 0 0 33.3333333333px rgb(255, 164, 182), 0 0 40px rgb(255, 164, 182), 0 0 100px rgb(255, 164, 182), 0 0 100px rgb(255, 164, 182), 0 0 100px rgb(255, 164, 182);
+}
+.icons li label {
+  cursor: pointer;
+  user-select: none;
+}
+.icons li label div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  border-radius: 20px;
+  border: 6.0606060606px solid #333;
+  background-color: #111;
+  transition: 0.3s;
+}
+.icons li label div span {
+  font-size: 100px;
+  transition: 0.3s;
+}

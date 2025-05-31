@@ -1,0 +1,71 @@
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- jQuery UI CDN -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+/* Google Web Fonts CDN */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
+font-family: 'Noto Sans KR', sans-serif;
+
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+font-family: 'Raleway', sans-serif;
+
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
+font-family: 'Montserrat', sans-serif;
+
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+font-family: 'Roboto', sans-serif;
+
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600&display=swap');
+font-family: 'Hind', sans-serif;
+
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+font-family: 'Source Sans Pro', sans-serif;
+
+/* Noonnu Korean Fonts */
+@font-face {
+  font-family: 'GmarketSansLight';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Fontawesome 4.7 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+/* XEION CDN */
+@import url('http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+
+======================================================
+
+■ Reference URL
+
+FontAwesome 4.7 CheatSheet
+https://fontawesome.bootstrapcheatsheets.com/
+
+FontAwesome 4.7 Official Website
+https://fontawesome.com/v4.7.0/icons/
+
+XEICON Ver2.3.3
+https://xpressengine.github.io/XEIcon/
+
+Web Gradients
+https://webgradients.com/
+
+W3 Schools Color Picker
+https://www.w3schools.com/colors/colors_picker.asp
+
+Flat UI colors
+https://flatuicolors.com/
+
+Social Colors
+https://www.materialui.co/socialcolors
+
+눈누 한글 폰트
+https://noonnu.cc/

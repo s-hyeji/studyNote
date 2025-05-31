@@ -1,0 +1,62 @@
+@import "reset";
+
+body {
+ font-size: 18px;
+ color: #000;
+ line-height: 1.6em;
+}
+
+h1 {
+ font-size: 60px;
+ font-weight: normal;
+ text-align: center;
+
+ span {
+  color: crimson;
+
+  &:hover {
+   color: royalblue;
+  }
+ }
+}
+
+/* @mixin and @include */
+
+@mixin header {
+ text-align: center;
+ font-size: 35px;
+ text-transform: capitalize;
+ position: relative;
+
+ span {
+  color: royalblue
+ }
+
+ &::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 4px;
+  background-color: crimson;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+ }
+}
+
+
+h1 {
+ @include header
+}
+
+
+// map-get
+$color: (
+ font-primary: #2d3436,
+ font-secondary: #636e72,
+ font-focus: #0984e3,
+);
+
+body {
+ background-color: map-get($color, font-focus);
+}

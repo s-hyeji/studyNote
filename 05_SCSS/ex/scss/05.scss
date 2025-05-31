@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #000;
+}
+
+
+//변수
+$icon-box-size: 200px;
+// $icon-color : #74baff;
+$icon-color : rgb(255, 164, 182);
+
+.icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: ($icon-box-size/4);
+
+
+  li {
+    input[type=checkbox] {
+      display: none;
+
+      &:checked+div {
+        border: none;
+        box-shadow:
+          0 0 ($icon-box-size/10) transparentize($icon-color, 0.5),
+          0 0 ($icon-box-size/10) transparentize($icon-color, 0.5),
+          0 0 ($icon-box-size/10) transparentize($icon-color, 0.5),
+          0 0 ($icon-box-size/10) transparentize($icon-color, 0.5),
+          0 0 ($icon-box-size/6) transparentize($icon-color, 0.2),
+          0 0 ($icon-box-size/6) transparentize($icon-color, 0.2),
+          0 0 ($icon-box-size/5) transparentize($icon-color, 0.2),
+          inset 0 0 ($icon-box-size/33.33) $icon-color;
+      }
+
+      &:checked+div span {
+        text-shadow:
+          0 0 ($icon-box-size/10) $icon-color,
+          0 0 ($icon-box-size/10) $icon-color,
+          0 0 ($icon-box-size/10) $icon-color,
+          0 0 ($icon-box-size/6) $icon-color,
+          0 0 ($icon-box-size/5) $icon-color,
+          0 0 ($icon-box-size/2) $icon-color,
+          0 0 ($icon-box-size/2) $icon-color,
+          0 0 ($icon-box-size/2) $icon-color,
+      }
+    }
+
+    label {
+      cursor: pointer;
+      user-select: none;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $icon-box-size;
+        height: $icon-box-size;
+        color: #fff;
+        border-radius: $icon-box-size / 10;
+        border: ($icon-box-size/33) solid #333;
+        background-color: #111;
+        transition: .3s;
+
+        span {
+          font-size: $icon-box-size / 2;
+          transition: .3s;
+        }
+      }
+    }
+  }
+}

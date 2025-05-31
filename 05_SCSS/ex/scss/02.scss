@@ -1,0 +1,73 @@
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600&display=swap');
+
+$logo-family : 'Hind',
+sans-serif;
+$logo-weight : 500;
+$logo-width: 200px;
+$logo-color: #222;
+$logo-spacing : 3px;
+
+@mixin radiusType($type) {
+  border-radius: $type;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/*피그마*/
+.figma {
+  width: $logo-width;
+
+  >span {
+    display: block;
+    margin-bottom: 5px;
+    font-family: $logo-family;
+    font-weight: $logo-weight;
+    color: $logo-color;
+    text-align: center;
+    font-size: $logo-width/3;
+    letter-spacing: $logo-spacing;
+  }
+
+  .shape {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    >span {
+      width: $logo-width / 2;
+      height: $logo-width / 2;
+
+      &:nth-child(1) {
+        background-color: #F24E1E;
+        @include radiusType(50% 0 0 50%);
+      }
+
+      &:nth-child(2) {
+        background-color: #FF7262;
+        @include radiusType(0 50% 50% 0);
+      }
+
+      &:nth-child(3) {
+        background-color: #A259FF;
+        @include radiusType(50% 0 0 50%);
+      }
+
+      &:nth-child(4) {
+        background-color: #1ABCFE;
+        @include radiusType(100%);
+
+      }
+
+      &:nth-child(5) {
+        background-color: #0ACF83;
+        @include radiusType(50% 0 50% 50%);
+      }
+    }
+  }
+}
