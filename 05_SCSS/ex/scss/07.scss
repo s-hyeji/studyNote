@@ -1,0 +1,172 @@
+//Variables
+$font-base: 10px;
+$color-base: #fff;
+
+// Mixins
+@mixin default {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  color: #222;
+  line-height: 1.6em;
+  background-color: #f8f8f8
+}
+
+@mixin heading {
+  position: relative;
+  padding-bottom: 40px;
+  text-align: center;
+  font-weight: normal;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: crimson;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  span {
+    color: crimson;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url('http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+
+* {
+  box-sizing: border-box
+}
+
+body {
+  @include default;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  // align-items: center;
+}
+
+/* Portfolio */
+.portfolio {
+  margin: 16px;
+
+  h1 {
+    @include heading;
+    font-size: $font-base * 5;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    // grid-gap: 15px;
+    grid-row-gap: 10px;
+    grid-column-gap: 15px;
+
+    div {
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba($color: #000000, $alpha: 0.15);
+
+      a {
+        img {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        font-size: 30px;
+        color: $color-base;
+
+      }
+
+      span {
+        position: absolute;
+        bottom: -40px;
+        width: 100%;
+        text-align: center;
+        color: $color-base;
+      }
+
+      span,
+      i,
+      &::before {
+        opacity: 0;
+        transition: .35s;
+        pointer-events: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(#000000, 0.4);
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+
+      &:hover i {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      &:hover span {
+        opacity: 1;
+        bottom: 0;
+      }
+    }
+
+    .focus {
+      grid-area: span 2/ span 2;
+      // grid-column: span 2;
+      // grid-row: span 2;
+    }
+  }
+}
+
+/*Tablet*/
+
+@media (min-width:768px) and (max-width:1366px) {
+  .portfolio {
+    h1 {
+      font-size: $font-base * 4;
+    }
+
+    .items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+
+/*Mobaile*/
+
+@media (max-width:768px) {
+  .portfolio {
+    h1 {
+      font-size: $font-base * 2.5
+    }
+
+    .items {
+      grid-template-columns: repeat(1, 1fr);
+
+      .focus {
+        grid-area: span 1/ span 1;
+      }
+    }
+
+
+  }
+}

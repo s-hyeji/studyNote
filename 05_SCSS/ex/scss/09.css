@@ -1,0 +1,3 @@
+.test {
+  font-size: clamp(14px, 2vw + 1rem, 50px);
+}

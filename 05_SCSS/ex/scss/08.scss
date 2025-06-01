@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
+// font-family: 'Noto Sans KR',sans-serif;
+// font-family: 'Montserrat',sans-serif;
+
+// map-gat
+$font-family: (
+  kor: 'Noto Sans KR',
+  eng:'Montserrat',
+);
+$font-color: (
+  primary : #222,
+  secondary : #555,
+);
+$font-size: (
+  base:15px,
+  small:24px,
+  medium:45px,
+  large:60px,
+);
+$bg-color: (
+  primary: #fff,
+  secondary : #f8f8f8
+);
+$btn-color: (
+  red: crimson,
+  blue: royalblue
+);
+
+//Mixin
+@mixin wavy-underLine ($color) {
+  text-decoration-style: wavy;
+  text-decoration-color: $color;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 14px;
+}
+
+@mixin btn-base($color) {
+  padding: 2px 8px;
+  color: #fff;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background-color: $color;
+}
+
+/* Reset CSS */
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2em;
+  margin-top: 0;
+  font-weight: normal;
+}
+
+/* Default CSS */
+body {
+  margin: 0;
+  font-family: map-get($font-family, kor);
+  color: map-get($font-color, primary);
+  font-size: map-get($font-size, base);
+  font-weight: 300;
+  line-height: 1.5em;
+  background-color: map-get($bg-color , primary);
+}
+
+/* section */
+.portflio {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  background: url(../images/08/background.png) no-repeat top center;
+
+  .headline-share {
+    h1 {
+      @include wavy-underLine(#e84393);
+      font-family: map-get($font-family, eng);
+      font-size: map-get($font-size, large);
+      text-transform: uppercase;
+    }
+
+    margin-bottom: 50px;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 1280px;
+
+    .item {
+
+      &.thum {
+        .photo {
+          width: 100%;
+          height: 400px;
+          box-shadow: 0 15px 45px rgba(0, 0, 0, 0.235);
+          border-radius: 15px;
+          overflow: hidden;
+
+          img {
+            width: inherit;
+            height: inherit;
+            object-fit: cover;
+            object-position: top;
+            transition: 2s;
+          }
+        }
+
+
+        &:hover {
+          img {
+            object-position: bottom;
+          }
+        }
+
+        .portfolio-title {
+          display: block;
+          text-align: center;
+          margin: 7px;
+          font-family: map-get($font-family, eng);
+
+          .btn-view {
+            &.pc {
+              @include btn-base(crimson);
+            }
+
+            &.mobile {
+              @include btn-base(royalblue);
+            }
+
+          }
+        }
+      }
+    }
+
+    aside.item {
+
+      // font-family: map-get($font-family, eng);
+      b {
+        font-weight: normal;
+        font-family: map-get($font-family, eng);
+        color: crimson
+      }
+
+      h2 {
+        font-family: map-get($font-family, eng);
+        font-size: 1.6em;
+        margin-top: 15px;
+      }
+
+      .portflio-info {
+        padding-left: 20px;
+        line-height: 1.6em;
+
+        span {
+          display: list-item;
+        }
+      }
+
+    }
+  }
+}
+
+// 테블릿
+@media (min-width: 768px) and (max-width:1024px) {
+  .portflio {
+    height: auto;
+    padding: 20px;
+    align-content: start;
+
+    .headline-share {
+      h1 {
+        font-size: map-get($font-size, medium);
+      }
+    }
+
+    .items {
+      width: 100%;
+      grid-template-columns: repeat(2, 1fr);
+
+      aside.item,
+      .item.thum:nth-of-type(3) {
+        grid-column: span 2;
+      }
+    }
+  }
+}
+
+// 모바일
+@media (max-width: 768px) {
+  .portflio {
+    height: auto;
+    padding: 20px;
+    align-content: start;
+
+    .headline-share {
+      h1 {
+        font-size: map-get($font-size, small);
+      }
+    }
+
+    .items {
+      width: 100%;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
