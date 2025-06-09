@@ -1,3 +1,60 @@
-.test {
-  font-size: clamp(14px, 2vw + 1rem, 50px);
+/* 변수 선언 법 */
+$변수배경: crimson;
+
+$변수폰트: (
+  디폴트 : 20px,
+  포인트 : 55px
+);
+
+$컬러: (
+  "orange" : orange,
+  "green" : green,
+  "blue" : blue
+);
+
+// @mixin @include
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin zoom($num) {
+  zoom: $num;
+}
+
+@mixin bgColor ($color) {
+  background-color: $color
+}
+
+/* 사용법 */
+.testBox {
+  @include flexCenter;
+
+  background-color: $변수배경;
+  font-size: map-get($변수폰트, 디폴트);
+
+  // @at-root: 강제로 빼기
+  q {
+    font-size: map-get($변수폰트, 포인트);
+    @include zoom(0.5)
+  }
+
+  span {
+    display: block;
+    width: 100px;
+    height: 100px;
+
+    // @each $color in $컬러 {
+    //   #{$color} {
+    //     background-color: $color;
+    //   }
+    // }
+
+    @for $i from 1 through length($컬러) {
+      &.#{$i} {
+        background-color: nth($컬러);
+      }
+    }
+  }
 }

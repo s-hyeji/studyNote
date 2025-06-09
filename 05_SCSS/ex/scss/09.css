@@ -1,3 +1,28 @@
-.test {
-  font-size: clamp(14px, 2vw + 1rem, 50px);
+@charset "UTF-8";
+/* 변수 선언 법 */
+/* 사용법 */
+.testBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: crimson;
+  font-size: 20px;
+}
+.testBox q {
+  font-size: 55px;
+  zoom: 0.5;
+}
+.testBox span {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+.testBox span orange orange {
+  background-color: "orange" orange;
+}
+.testBox span green green {
+  background-color: "green" green;
+}
+.testBox span blue blue {
+  background-color: "blue" blue;
 }
