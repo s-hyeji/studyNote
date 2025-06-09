@@ -27,6 +27,12 @@ $컬러: (
   background-color: $color
 }
 
+// extend
+
+%circle {
+  border-radius: 50%
+}
+
 /* 사용법 */
 .testBox {
   @include flexCenter;
@@ -37,24 +43,21 @@ $컬러: (
   // @at-root: 강제로 빼기
   q {
     font-size: map-get($변수폰트, 포인트);
-    @include zoom(0.5)
+    @include zoom(0.5);
+
+    // @extend %circle;
   }
 
   span {
     display: block;
     width: 100px;
     height: 100px;
+    // @extend %circle;
+  }
 
-    // @each $color in $컬러 {
-    //   #{$color} {
-    //     background-color: $color;
-    //   }
-    // }
-
-    @for $i from 1 through length($컬러) {
-      &.#{$i} {
-        background-color: nth($컬러);
-      }
+  @each $name, $color in $컬러 {
+    span.#{$name} {
+      background-color: $color;
     }
   }
 }

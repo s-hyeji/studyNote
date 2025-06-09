@@ -17,12 +17,12 @@
   width: 100px;
   height: 100px;
 }
-.testBox span orange orange {
-  background-color: "orange" orange;
+.testBox span.orange {
+  background-color: orange;
 }
-.testBox span green green {
-  background-color: "green" green;
+.testBox span.green {
+  background-color: green;
 }
-.testBox span blue blue {
-  background-color: "blue" blue;
+.testBox span.blue {
+  background-color: blue;
 }
