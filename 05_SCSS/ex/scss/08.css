@@ -78,12 +78,15 @@ body {
 .portflio .items .item.thum .photo img {
   width: inherit;
   height: inherit;
-  object-fit: cover;
-  object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   transition: 2s;
 }
 .portflio .items .item.thum:hover img {
-  object-position: bottom;
+  -o-object-position: bottom;
+     object-position: bottom;
 }
 .portflio .items .item.thum .portfolio-title {
   display: block;

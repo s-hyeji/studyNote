@@ -32,7 +32,9 @@ body {
 }
 .icons li label {
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .icons li label div {
   display: flex;
