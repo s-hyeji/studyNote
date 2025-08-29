@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottie 연습</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+</head>
+
+<body>
+  <h2>Lottie 연습</h2>
+  <div id="lottie-box" style="width:400px;height:400px;"></div>
+  <script>
+    const anim = lottie.loadAnimation({
+      container: document.getElementById('lottie-box'),
+      renderer: 'svg',        // 'svg' | 'canvas' | 'html'
+      loop: true,             // 반복 여부
+      autoplay: true,         // 자동재생 여부
+      path: './js/14_lottietest.json',
+      name: 'myAnim'          // (옵션) 이름 붙이기
+    });
+    console.log(
+      anim.currentFrame,   // 현재 프레임 (숫자)
+      anim.totalFrames,   // 전체 프레임 수
+      anim.isPaused,    // 현재 상태 (true/false)
+      anim.playDirection, // 재생 방향 (1/-1)
+      anim.frameRate      // 프레임 레이트
+    )
+
+    // ★제어함수★
+    // anim.play();         // 재생
+    // anim.stop();         // 정지 (0프레임으로 리셋)
+    // anim.pause();        // 일시정지
+    // anim.goToAndStop(frame, isFrame); // 특정 위치에서 멈춤
+    // anim.goToAndPlay(frame, isFrame); // 특정 위치에서 재생
+
+    // anim.setSpeed(2);    // 2배속
+    // anim.setSpeed(0.5);  // 절반 속도
+    // anim.setDirection(1);   // 정방향
+    // anim.setDirection(-1);  // 역방향
+
+    // anim.playSegments([30, 60], true);
+    // 30프레임~60프레임만 재생
+    // true = 즉시 실행 / false = 다음 loop에 실행
+
+    // anim.loop = false; // 루프 끄기
+    // anim.loop = true;  // 루프 켜기
+    // anim.loop = 3;     // 3번만 반복
+
+
+    // ★콜백★
+    // anim.addEventListener('complete', () => {
+    //   console.log('애니메이션 끝남!');
+    // });
+    // anim.addEventListener('loopComplete', () => {
+    //   console.log('루프 한 사이클 끝남!');
+    // });
+    // anim.addEventListener('enterFrame', (e) => {
+    //   console.log('현재 프레임:', e.currentTime);
+    // });
+    // anim.addEventListener('segmentStart', () => {
+    //   console.log('세그먼트 재생 시작');
+    // });
+    // anim.addEventListener('destroy', () => {
+    //   console.log('애니메이션 제거됨');
+    // });
+
+    //
+    // anim.destroy();  // 애니메이션/이벤트 제거 → 메모리 해제
+    const allAnims = lottie.getRegisteredAnimations(); // 등록된 모든 애니메이션 배열
+    console.log(allAnims);
+    // lottie.destroy('myAnim');  // 이름 지정해서 제거
+  </script>
+</body>
+
+</html>
