@@ -1,0 +1,60 @@
+#wrap {
+  width: 400px;
+  height: 600px;
+  overflow: hidden;
+  padding-right: 50px;
+
+  margin: 0 auto;
+}
+
+.scroll-container {
+  position: relative;
+  height: 510px;
+  padding-right: 25px;
+}
+
+.scroll-container .scroll-content {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-y !important;
+}
+
+.scroll-container .scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container .scroll-thumb-container {
+  position: absolute;
+  top: 9px;
+  right: -5px;
+  width: 14px;
+  height: 97%;
+  border: 2px solid #EFEFEF;
+  border-radius: 50px;
+  background-color: #ccc;
+
+  z-index: 10;
+}
+
+.scroll-container .scroll-thumb {
+  position: absolute;
+  left: -9px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  /* outline: 2px solid #FFD9E1; */
+  background-color: #FF6982;
+  box-shadow: 0 0 0 2px #FFD9E1, 3px 5px 0px rgba(0, 0, 0, .2);
+
+  cursor: pointer;
+  touch-action: none;
+  /* ← 네이티브 스와이프 비활성화(드래그 우선권 확보) */
+  z-index: 11;
+  /* ← 트랙 위에 명시적으로 */
+}

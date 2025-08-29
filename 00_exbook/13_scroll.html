@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스크롤 커스텀</title>
+  <link rel="stylesheet" href="./css/13_scroll.css">
+</head>
+
+<body>
+  <div id="wrap">
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae nesciunt fuga sapiente illum dolore
+          dicta
+          provident voluptatibus, praesentium, labore assumenda dolores hic est tenetur harum culpa! Cupiditate iure
+          ipsam
+          minima.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem beatae voluptatum eum quis ex deserunt
+          dolorem
+          blanditiis ducimus, maxime doloremque saepe necessitatibus pariatur excepturi commodi molestias officia,
+          officiis quod cum!</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<script>
+  // 커스텀 스크롤
+  const initScroll = () => {
+    document.querySelectorAll('.scroll-container').forEach((container, idx) => {
+      if (container.dataset.scrollInited === '1') return;
+
+      const content = container.querySelector('.scroll-content');
+      if (!content) return;
+
+      let track = container.querySelector('.scroll-thumb-container');
+      if (!track) {
+        track = document.createElement('div');
+        track.className = 'scroll-thumb-container';
+        container.appendChild(track);
+      }
+      let thumb = track.querySelector('.scroll-thumb');
+      if (!thumb) {
+        thumb = document.createElement('div');
+        thumb.className = 'scroll-thumb';
+        track.appendChild(thumb);
+      }
+
+      track.style.pointerEvents = 'none';
+      thumb.style.pointerEvents = 'auto';
+      thumb.style.touchAction = 'none';
+      content.style.overscrollBehavior ||= 'contain';
+      content.style.webkitOverflowScrolling ||= 'touch';
+
+      // ------------ 공통 유틸 ------------
+      const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+      const geom = () => {
+        const trackH = track.clientHeight || content.clientHeight || 0;
+        const thumbH = thumb.offsetHeight || 1;
+        const scrollRange = Math.max(0, content.scrollHeight - content.clientHeight);
+        const trackLen = Math.max(1, trackH - thumbH); // 0 분모 방지
+        return { scrollRange, trackLen };
+      };
+      const updateThumb = () => {
+        const { scrollRange, trackLen } = geom();
+        const ratio = scrollRange ? content.scrollTop / scrollRange : 0;
+        thumb.style.top = `${ratio * trackLen}px`;
+      };
+
+      // 네이티브 스크롤 → 썸 위치 동기화
+      content.addEventListener('scroll', updateThumb, { passive: true });
+      window.addEventListener('resize', updateThumb);
+
+      // ------------ 썸 드래그 ------------
+      let draggingThumb = false;
+      let startY = 0;
+      let startScrollTop = 0;
+      let raf = null;
+
+      const dragTo = (clientY) => {
+        const { scrollRange, trackLen } = geom();
+        const deltaY = clientY - startY;
+        const next = clamp(startScrollTop + (scrollRange * deltaY) / trackLen, 0, scrollRange);
+        if (!raf) {
+          raf = requestAnimationFrame(() => {
+            content.scrollTop = next;
+            updateThumb();
+            raf = null;
+          });
+        }
+      };
+
+      // 마우스/터치 통합
+      thumb.addEventListener('pointerdown', (e) => {
+        draggingThumb = true;
+        startY = e.clientY;
+        startScrollTop = content.scrollTop;
+        if (thumb.setPointerCapture && e.pointerId != null) {
+          try { thumb.setPointerCapture(e.pointerId); } catch { }
+        }
+        e.preventDefault(); // 썸 드래그 중엔 네이티브 제스처 억제
+        e.stopPropagation();
+      }, { passive: false });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!draggingThumb) return;
+        if (e.pointerType === 'touch' && e.pressure === 0) return;
+        dragTo(e.clientY);
+        e.preventDefault();
+      }, { passive: false });
+
+      const endThumb = (e) => {
+        if (!draggingThumb) return;
+        draggingThumb = false;
+        if (thumb.releasePointerCapture && e?.pointerId != null) {
+          try { thumb.releasePointerCapture(e.pointerId); } catch { }
+        }
+      };
+      window.addEventListener('pointerup', endThumb, { passive: true });
+      window.addEventListener('pointercancel', endThumb, { passive: true });
+
+      // 구형 웹뷰 터치 폴백
+      thumb.addEventListener('touchstart', (e) => {
+        const t = e.touches?.[0]; if (!t) return;
+        draggingThumb = true;
+        startY = t.clientY;
+        startScrollTop = content.scrollTop;
+        e.preventDefault();
+        e.stopPropagation();
+      }, { passive: false });
+      window.addEventListener('touchmove', (e) => {
+        if (!draggingThumb) return;
+        const t = e.touches?.[0]; if (!t) return;
+        dragTo(t.clientY);
+        e.preventDefault();
+      }, { passive: false });
+      window.addEventListener('touchend', () => { draggingThumb = false; }, { passive: true });
+      window.addEventListener('touchcancel', () => { draggingThumb = false; }, { passive: true });
+
+      let panning = false;
+      let panStartY = 0;
+      let panStartTop = 0;
+      const PAN_THRESHOLD = 6; // 6px 이상 움직일 때 패닝 전환
+
+      container.addEventListener('pointerdown', (e) => {
+        if (e.target === thumb || thumb.contains(e.target)) return;
+        if (e.button != null && e.button !== 0) return;
+
+        panning = false;
+        panStartY = e.clientY;
+        panStartTop = content.scrollTop;
+      }, { passive: true });
+
+      window.addEventListener('pointermove', (e) => {
+        if (draggingThumb) return;
+
+        if (panStartY !== 0 && !panning) {
+          const dy = Math.abs(e.clientY - panStartY);
+          if (dy > PAN_THRESHOLD) panning = true;
+        }
+        if (!panning) return;
+        const dy = panStartY - e.clientY;
+        content.scrollTop = panStartTop + dy;
+        updateThumb();
+        e.preventDefault();
+      }, { passive: false });
+
+      const endPan = () => {
+        panning = false;
+        panStartY = 0;
+      };
+      window.addEventListener('pointerup', endPan, { passive: true });
+      window.addEventListener('pointercancel', endPan, { passive: true });
+
+      // 구형 터치 폴백
+      container.addEventListener('touchstart', (e) => {
+        if (e.target === thumb || thumb.contains(e.target)) return;
+        const t = e.touches?.[0]; if (!t) return;
+        panning = false;
+        panStartY = t.clientY;
+        panStartTop = content.scrollTop;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (draggingThumb) return;
+        const t = e.touches?.[0]; if (!t) return;
+
+        if (panStartY !== 0 && !panning) {
+          const dy0 = Math.abs(t.clientY - panStartY);
+          if (dy0 > PAN_THRESHOLD) panning = true;
+        }
+        if (!panning) return;
+
+        const dy = panStartY - t.clientY;
+        content.scrollTop = panStartTop + dy;
+        updateThumb();
+        e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('touchend', endPan, { passive: true });
+      window.addEventListener('touchcancel', endPan, { passive: true });
+
+      // 초기 동기화
+      updateThumb();
+      container.dataset.scrollInited = '1';
+    });
+  };
+
+  window.addEventListener("DOMContentLoaded", () => {
+    initScroll();
+  })
+</script>
+
+</html>
