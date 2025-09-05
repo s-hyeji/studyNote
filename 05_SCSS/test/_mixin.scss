@@ -1,0 +1,50 @@
+// 반응형
+$breakpoints: (
+  "mobile": 430px,
+  "tablet": 768px,
+  "desktop": 1200px
+);
+
+@mixin mq($device) {
+  @media (max-width: map-get($breakpoints, $device)) {
+    @content;
+  }
+}
+
+// flex-center
+@mixin flex-center ($dir : row, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+// grid
+@mixin grid($columns, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+
+// font
+@function strip-unit($value) {
+  @if type-of($value)=="number" and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+
+  @return $value;
+}
+
+// @include fluid-size(font-size, 14px, 20px);
+@mixin fluid-size($property, $min, $max, $vw-min: 375px, $vw-max: 1920px) {
+  $min-num: strip-unit($min);
+  $max-num: strip-unit($max);
+  $vw-min-num: strip-unit($vw-min);
+  $vw-max-num: strip-unit($vw-max);
+
+  #{$property}: clamp(#{$min},
+    calc(#{$min} + (#{$max-num} - #{$min-num}) * ((100vw - #{$vw-min}) / (#{$vw-max-num} - #{$vw-min-num}))),
+    #{$max});
+}
