@@ -1,0 +1,15 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.layout__header {
+
+  .header {
+    &__toggle-box {
+      @include flex(space-between, center);
+
+      width: 100px;
+    }
+
+  }
+
+}

@@ -1,0 +1,9 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.layout__nav {
+  .sidebar {
+    @include flex-center;
+    flex-direction: column;
+  }
+}

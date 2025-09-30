@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>혜지 페이지 구조 연습</title>
+</head>
+
+<body>
+
+  <div id="wrap" class="layout">
+    <header class="layout__header">
+      <%- include('components/header.ejs') %>
+    </header>
+    <div class="layout__body">
+      <nav class="layout__nav">
+        <%- include('components/nav.ejs') %>
+      </nav>
+      <main class="layout__content">
+        <%- include('components/main.ejs') %>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>
