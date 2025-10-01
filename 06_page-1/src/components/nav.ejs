@@ -1,12 +1,85 @@
 <div class="nav__menu">
   <div class="nav__logo">
-    <ul>
-      <li> <a href="#">카테고리</a> </li>
-      <li> <a href="#">구독</a> </li>
-    </ul>
-    <ul>
-      <li> <a href="#">공작소</a> </li>
-      <li> <a href="#">에디터</a> </li>
-    </ul>
+    <div class="nav__list--collapsed">
+      <ul class="nav__section">
+        <li> <a href="#">카테고리</a> </li>
+        <li> <a href="#">구독</a> </li>
+      </ul>
+      <ul class="nav__section">
+        <li> <a href="#">공작소</a> </li>
+        <li> <a href="#">에디터</a> </li>
+      </ul>
+    </div>
+    <div class="nav__list--expanded">
+      <!-- 탐색 -->
+      <div class="nav__section">
+        <h3>탐색</h3>
+        <ul>
+          <li><a href="#">학습</a></li>
+          <li><a href="#">퀴즈</a></li>
+          <li><a href="#">스토리</a></li>
+          <li><a href="#">게임</a></li>
+          <li><a href="#">카드뉴스</a></li>
+          <li><a href="#">카툰로그</a></li>
+          <li><a href="#">재미</a></li>
+          <li><a href="#">라이프스타일</a></li>
+        </ul>
+      </div>
+
+      <!-- 구독 -->
+      <div class="nav__section">
+        <h3>구독</h3>
+        <ul>
+          <li><a href="#">Joysomsee</a></li>
+          <li><a href="#">소쩍로그</a></li>
+        </ul>
+      </div>
+
+      <!-- SNS -->
+      <div class="nav__section">
+        <h3>SNS</h3>
+        <ul>
+          <li><a href="#">유튜브</a></li>
+          <li><a href="#">인스타그램</a></li>
+          <li><a href="#">블로그</a></li>
+        </ul>
+      </div>
+
+      <!-- 네브 하단 (푸터 영역) -->
+      <div class="nav__section nav__footer">
+        <ul>
+          <li><a href="#">솔루션 소개</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+        </ul>
+
+        <div class="family-site">
+          <label for="familySite">패밀리 사이트</label>
+          <select id="familySite" onchange="if(this.value) window.open(this.value)">
+            <option value="">패밀리 사이트 바로가기</option>
+            <option value="https://tovsoft.co.kr">토브소프트</option>
+            <option value="https://somsieditor.co.kr">솜씨에디터</option>
+            <option value="https://partner-site.com">파트너 사이트</option>
+          </select>
+        </div>
+
+        <address class="company-info">
+          <p>
+            <strong>(주)토브소프트</strong>는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.<br>
+            따라서 <strong>(주)토브소프트</strong>는 콘텐츠, 거래정보 및 거래에 대하여 책임을 지지 않습니다.
+          </p>
+          <p>
+            <strong>(주)토브소프트</strong><br>
+            서울특별시 종로구 유적골로2길 21 대형빌딩 8층<br>
+            솜씨미디어센터: 광교뮤미뉴스 지식산업센터 B동 304<br>
+            TEL: 02-6959-2707&nbsp;&nbsp;FAX: 070-7176-1004
+          </p>
+        </address>
+
+        <div class="copyright">
+          <p>Copyright © TOVSOFT. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
