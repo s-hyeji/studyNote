@@ -1,0 +1,22 @@
+body {
+  padding: 20px;
+}
+
+.App {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.App>section {
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 5px;
+
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
