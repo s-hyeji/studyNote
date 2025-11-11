@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김채림</title>
+
+  <style>
+    body::after {
+      content: "";
+      display: none;
+      background-image:
+        url(./images/16_pepero/inner.png),
+        url(./images/16_pepero/box.png),
+        url(./images/16_pepero/pepero.png),
+    }
+
+    @font-face {
+      font-family: 'SandollSamlipHobbangOutline';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+      font-weight: normal;
+      font-display: swap;
+    }
+
+    #wrap {
+      width: 600px;
+      padding: 30px 10px;
+      margin: 0 auto;
+    }
+
+    p.txt {
+      text-align: center;
+      font-size: 32px;
+      font-family: 'SandollSamlipHobbangOutline';
+      margin: 10px 0px 40px 0px;
+
+    }
+
+    .pepero-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      left: -16px;
+
+      width: 300px;
+      height: 375px;
+
+      margin: 0 auto;
+
+      background: url(./images/16_pepero/box.png)center right/contain no-repeat;
+      cursor: pointer;
+    }
+
+    .pepero-container.--on {
+      cursor: auto;
+      background-image: url(./images/16_pepero/inner.png);
+    }
+
+    .--on .pepero-items {
+      position: relative;
+      left: 15px;
+      width: 70%;
+      height: 70%;
+      background: url(./images/16_pepero/pepero.png)center/contain no-repeat;
+
+      filter: drop-shadow(3px 3px 2px #0000004d);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <p class="txt">열어주세용 ^^~</p>
+    <div class="pepero-container">
+      <div class="pepero-items"></div>
+    </div>
+  </div>
+</body>
+
+<script type="module">
+  const container = document.querySelector('.pepero-container');
+  const txt = document.querySelector('.txt');
+  container.addEventListener('click', (e) => {
+    if (e.srcElement.classList.contains("--on")) return;
+    e.srcElement.classList.add("--on");
+    txt.innerHTML = "빼빼로 선물입니당 ^^~"
+  });
+</script>
+
+</html>

@@ -2,134 +2,134 @@
 <html lang="ko">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>움직이기 연습</title>
- <link rel="stylesheet" href="./css/reset.css">
- <link rel="stylesheet" href="./css/07_moveChar.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>움직이기 연습</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/07_moveChar.css">
 </head>
 
 <body>
- <div id="wrap">
-  <div class="lineguide"></div>
-  <div class="moveBox">
-   <div class="char"></div>
+  <div id="wrap">
+    <div class="lineguide"></div>
+    <div class="moveBox">
+      <div class="char"></div>
+    </div>
+    <div class="keyContainer">
+      <div class="up"></div>
+      <div class="left"></div>
+      <div class="down"></div>
+      <div class="right"></div>
+    </div>
+
   </div>
-  <div class="keyContainer">
-   <div class="up"></div>
-   <div class="left"></div>
-   <div class="down"></div>
-   <div class="right"></div>
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lineguide = document.querySelector(".lineguide");
+      const moveBox = document.querySelector(".moveBox");
+      // 
+      // lineguide 생성
+      const rowConfig = [5, 5, 11, 11, 11, 11, 5, 5, 5];
+      const rows = rowConfig.map((cols) => {
+        const li = document.createElement("li");
+        for (let i = 0; i < cols; i++) {
+          li.appendChild(document.createElement("div"));
+        }
+        lineguide.appendChild(li);
+        return li;
+      });
+      // 
+      // 시작위치 설정
+      let rowIndex = 4;
+      let colIndex = 2;
 
- </div>
- <script>
-  document.addEventListener("DOMContentLoaded", () => {
-   const lineguide = document.querySelector(".lineguide");
-   const moveBox = document.querySelector(".moveBox");
-   // 
-   // lineguide 생성
-   const rowConfig = [5, 5, 11, 11, 11, 11, 5, 5, 5];
-   const rows = rowConfig.map((cols) => {
-    const li = document.createElement("li");
-    for (let i = 0; i < cols; i++) {
-     li.appendChild(document.createElement("div"));
-    }
-    lineguide.appendChild(li);
-    return li;
-   });
-   // 
-   // 시작위치 설정
-   let rowIndex = 4;
-   let colIndex = 2;
+      function movingChar() {
+        const row = rows[rowIndex];
+        if (!row) return;
 
-   function movingChar() {
-    const row = rows[rowIndex];
-    if (!row) return;
+        const cells = row.children;
+        if (colIndex >= cells.length) colIndex = cells.length - 1;
 
-    const cells = row.children;
-    if (colIndex >= cells.length) colIndex = cells.length - 1;
+        const targetCell = cells[colIndex];
+        if (targetCell) {
+          moveBox.style.top = targetCell.offsetTop + "px";
+          moveBox.style.left = targetCell.offsetLeft + "px";
+        }
 
-    const targetCell = cells[colIndex];
-    if (targetCell) {
-     moveBox.style.top = targetCell.offsetTop + "px";
-     moveBox.style.left = targetCell.offsetLeft + "px";
-    }
-
-    if (colIndex === 0 && rowIndex >= 0 && rowIndex <= 7) {
-     setTimeout(() => {
-      alert(`도착`);
-     }, 300);
-    } else if ((rowIndex <= 1 && colIndex === 4) || (rowIndex === 2 && colIndex >= 5 && colIndex <= 7)) {
-     setTimeout(() => {
-      alert(`도착`);
-     }, 300);
-    } else if ((rowIndex <= 1 && colIndex === 4) || (rowIndex === 2 && colIndex >= 5 && colIndex <= 7) || (rowIndex === 5 && colIndex >= 5 && colIndex <= 7) || (rowIndex >= 6 && rowIndex <= 8 && colIndex === 4)) {
-     setTimeout(() => {
-      alert(`도착`);
-     }, 300);
-    } else if (colIndex === 10 && rowIndex >= 3 && rowIndex <= 5) {
-     setTimeout(() => {
-      alert(`도착`);
-     }, 300);
-    }
-   }
-
-   function move(direction) {
-    let newRow = rowIndex;
-    let newCol = colIndex;
-
-    switch (direction) {
-     case "up":
-      if (
-       rowIndex > 0 &&
-       !(rowIndex === 2 && colIndex >= 5) &&
-       !(rowIndex === 6 && colIndex >= 5)
-      ) {
-       newRow--;
+        // if (colIndex === 0 && rowIndex >= 0 && rowIndex <= 7) {
+        //   setTimeout(() => {
+        //     alert(`도착`);
+        //   }, 300);
+        // } else if ((rowIndex <= 1 && colIndex === 4) || (rowIndex === 2 && colIndex >= 5 && colIndex <= 7)) {
+        //   setTimeout(() => {
+        //     alert(`도착`);
+        //   }, 300);
+        // } else if ((rowIndex <= 1 && colIndex === 4) || (rowIndex === 2 && colIndex >= 5 && colIndex <= 7) || (rowIndex === 5 && colIndex >= 5 && colIndex <= 7) || (rowIndex >= 6 && rowIndex <= 8 && colIndex === 4)) {
+        //   setTimeout(() => {
+        //     alert(`도착`);
+        //   }, 300);
+        // } else if (colIndex === 10 && rowIndex >= 3 && rowIndex <= 5) {
+        //   setTimeout(() => {
+        //     alert(`도착`);
+        //   }, 300);
+        // }
       }
-      break;
-     case "down":
-      if (
-       rowIndex < rows.length - 1 &&
-       !(rowIndex === 5 && colIndex >= 5)
-      ) {
-       newRow++;
+
+      function move(direction) {
+        let newRow = rowIndex;
+        let newCol = colIndex;
+
+        switch (direction) {
+          case "up":
+            if (
+              rowIndex > 0 &&
+              !(rowIndex === 2 && colIndex >= 5) &&
+              !(rowIndex === 6 && colIndex >= 5)
+            ) {
+              newRow--;
+            }
+            break;
+          case "down":
+            if (
+              rowIndex < rows.length - 1 &&
+              !(rowIndex === 5 && colIndex >= 5)
+            ) {
+              newRow++;
+            }
+            break;
+          case "left":
+            if (colIndex > 0) newCol--;
+            break;
+          case "right":
+            if (colIndex < rowConfig[rowIndex] - 1) newCol++;
+            break;
+        }
+
+        rowIndex = newRow;
+        colIndex = newCol;
+        movingChar();
       }
-      break;
-     case "left":
-      if (colIndex > 0) newCol--;
-      break;
-     case "right":
-      if (colIndex < rowConfig[rowIndex] - 1) newCol++;
-      break;
-    }
 
-    rowIndex = newRow;
-    colIndex = newCol;
-    movingChar();
-   }
+      // 키보드 이벤트
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp") move("up");
+        else if (e.key === "ArrowDown") move("down");
+        else if (e.key === "ArrowLeft") move("left");
+        else if (e.key === "ArrowRight") move("right");
+      });
 
-   // 키보드 이벤트
-   document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowUp") move("up");
-    else if (e.key === "ArrowDown") move("down");
-    else if (e.key === "ArrowLeft") move("left");
-    else if (e.key === "ArrowRight") move("right");
-   });
+      // 버튼 클릭 이벤트
+      document.querySelector(".keyContainer").addEventListener("click", (e) => {
+        if (e.target.classList.contains("up")) move("up");
+        else if (e.target.classList.contains("down")) move("down");
+        else if (e.target.classList.contains("left")) move("left");
+        else if (e.target.classList.contains("right")) move("right");
+      });
 
-   // 버튼 클릭 이벤트
-   document.querySelector(".keyContainer").addEventListener("click", (e) => {
-    if (e.target.classList.contains("up")) move("up");
-    else if (e.target.classList.contains("down")) move("down");
-    else if (e.target.classList.contains("left")) move("left");
-    else if (e.target.classList.contains("right")) move("right");
-   });
+      movingChar();
+    });
 
-   movingChar();
-  });
-
- </script>
+  </script>
 </body>
 
 </html>
