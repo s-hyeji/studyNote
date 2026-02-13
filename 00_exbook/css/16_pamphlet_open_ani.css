@@ -1,0 +1,171 @@
+/* =========================
+   LAYOUT
+========================= */
+.pamphlet {
+  display: flex;
+  gap: 60px;
+  padding: 20px;
+  position: relative;
+}
+
+.pamphlet__item {
+  position: relative;
+  width: 230px;
+  height: 300px;
+  cursor: pointer;
+  perspective: 1200px;
+
+  /* 🔥 핵심: 이동 애니메이션 */
+  transition:
+    transform 600ms cubic-bezier(.22, .8, .2, 1),
+    opacity 350ms ease,
+    filter 350ms ease;
+}
+
+/* =========================
+   다른 카드 흐려지기 (이동 X, 사라지는 연출)
+========================= */
+.pamphlet.has-open .pamphlet__item {
+  opacity: 0.2;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.pamphlet.has-open .pamphlet__item.is-open {
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+  z-index: 50;
+}
+
+/* =========================
+   선택된 카드가 "1번 자리로 이동" (DOM 이동 아님!!)
+   nth-child 기준으로 이동 거리만 계산
+========================= */
+.pamphlet.has-open .pamphlet__item:nth-child(2).is-open {
+  transform: translateX(calc(-1 * (230px + 60px)));
+}
+
+.pamphlet.has-open .pamphlet__item:nth-child(3).is-open {
+  transform: translateX(calc(-2 * (230px + 60px)));
+}
+
+.pamphlet.has-open .pamphlet__item:nth-child(4).is-open {
+  transform: translateX(calc(-3 * (230px + 60px)));
+}
+
+/* =========================
+   CARDS STAGE
+========================= */
+.pamphlet__item .cards {
+  position: relative;
+  width: 230px;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+/* =========================
+   CARD BASE (쌓인 상태)
+========================= */
+.cards__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 300px;
+
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, .06);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 40px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, .15),
+    inset 10px 0 18px rgba(0, 0, 0, .08);
+
+  transform-origin: left center;
+  transform: translateX(0) rotateY(0);
+
+  transition:
+    transform 650ms cubic-bezier(.18, .9, .18, 1),
+    opacity 300ms ease;
+}
+
+/* z-index (1번이 맨 위) */
+.cards__item:nth-of-type(1) {
+  z-index: 10;
+}
+
+.cards__item:nth-of-type(2) {
+  z-index: 9;
+}
+
+.cards__item:nth-of-type(3) {
+  z-index: 8;
+}
+
+.cards__item:nth-of-type(4) {
+  z-index: 7;
+}
+
+/* 파스텔 컬러 */
+.cards__item:nth-of-type(1) {
+  background: linear-gradient(180deg, #ffe4e6, #fecdd3);
+}
+
+.cards__item:nth-of-type(2) {
+  background: linear-gradient(180deg, #ffedd5, #fed7aa);
+}
+
+.cards__item:nth-of-type(3) {
+  background: linear-gradient(180deg, #fef9c3, #fde68a);
+}
+
+.cards__item:nth-of-type(4) {
+  background: linear-gradient(180deg, #dcfce7, #bbf7d0);
+}
+
+/* =========================
+   기본: 카드가 1번 위로 모여있는 상태 (접힘)
+========================= */
+/* .pamphlet__item:not(.is-open) .cards__item:nth-of-type(2) {
+  transform: translateY(-3px);
+}
+
+.pamphlet__item:not(.is-open) .cards__item:nth-of-type(3) {
+  transform: translateY(-6px);
+}
+
+.pamphlet__item:not(.is-open) .cards__item:nth-of-type(4) {
+  transform: translateY(-9px);
+} */
+
+/* =========================
+   펼침 (이동 완료 후 촤르르)
+========================= */
+.pamphlet.has-open .pamphlet__item.is-open .cards__item:nth-of-type(1) {
+  transform: translateX(0);
+  transition-delay: 0ms;
+}
+
+.pamphlet.has-open .pamphlet__item.is-open .cards__item:nth-of-type(2) {
+  transform: translateX(230px);
+  transition-delay: 120ms;
+}
+
+.pamphlet.has-open .pamphlet__item.is-open .cards__item:nth-of-type(3) {
+  transform: translateX(460px);
+  transition-delay: 240ms;
+}
+
+.pamphlet.has-open .pamphlet__item.is-open .cards__item:nth-of-type(4) {
+  transform: translateX(690px);
+  transition-delay: 360ms;
+}

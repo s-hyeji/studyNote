@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/16_pamphlet_open_ani.css">
+
+  <title>테스트</title>
+</head>
+
+<body>
+  <ul class="pamphlet">
+    <li class="pamphlet__item">
+      <div class="fold">
+        <ul class="cards">
+          <li class="cards__item">1</li>
+          <li class="cards__item">2</li>
+          <li class="cards__item">3</li>
+          <li class="cards__item">4</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="pamphlet__item">
+      <div class="fold">
+        <ul class="cards">
+          <li class="cards__item">1</li>
+          <li class="cards__item">2</li>
+          <li class="cards__item">3</li>
+          <li class="cards__item">4</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="pamphlet__item">
+      <div class="fold">
+        <ul class="cards">
+          <li class="cards__item">1</li>
+          <li class="cards__item">2</li>
+          <li class="cards__item">3</li>
+          <li class="cards__item">4</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+</body>
+<script>
+  const pamphlet = document.querySelector('.pamphlet');
+  const items = document.querySelectorAll('.pamphlet__item');
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      items.forEach(el => el.classList.remove('is-open'));
+      pamphlet.classList.remove('has-open');
+
+      if (!isOpen) {
+        item.classList.add('is-open');
+        pamphlet.classList.add('has-open');
+      }
+    });
+  });
+
+
+</script>
+
+</html>
