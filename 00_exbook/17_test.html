@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>국어 맞춤법 테트리스 - 하강 로직 수정판</title>
+  <style>
+    :root {
+      --bg-yellow: #FFD54F;
+      --board-border: #FFA000;
+      --green: #8BC34A;
+      --purple: #9575CD;
+      --yellow: #FBC02E;
+      --blue: #03A9F4;
+      --pink: #F06292;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Malgun Gothic', sans-serif;
+    }
+
+    #game-container {
+      width: 920px;
+      height: 620px;
+      background-color: white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 8px solid #ddd;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .header {
+      background-color: #455A64;
+      color: white;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .main-stage {
+      flex: 1;
+      display: flex;
+      padding: 30px;
+      gap: 40px;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, #ffffff 0%, #f3f3f3 100%);
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 90px);
+      grid-template-rows: repeat(3, 90px);
+      gap: 8px;
+      background-color: var(--board-border);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .cell {
+      background-color: white;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .cell.clear-anim {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    .quiz-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-width: 420px;
+    }
+
+    .word-box {
+      font-size: 52px;
+      font-weight: 900;
+      padding: 15px 70px;
+      border: 5px solid #333;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 6px 6px 0px #333;
+      margin-bottom: 10px;
+    }
+
+    .options-wrapper {
+      display: flex;
+      gap: 15px;
+    }
+
+    .option-card {
+      cursor: pointer;
+      border: 3px solid #eee;
+      padding: 15px;
+      border-radius: 20px;
+      background: white;
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .option-card:hover {
+      border-color: var(--board-border);
+      transform: translateY(-5px);
+    }
+
+    .shape-grid {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .block-unit {
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+    }
+
+    .option-text {
+      font-weight: bold;
+      font-size: 24px;
+      color: #444;
+    }
+
+    .footer-bar {
+      background-color: var(--bg-yellow);
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 19px;
+      border-top: 2px solid #e0b000;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-8px);
+      }
+
+      75% {
+        transform: translateX(8px);
+      }
+    }
+
+    .shake {
+      animation: shake 0.3s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="game-container">
+    <div class="header">
+      <span>국어 5-1 | 5. 의논하며 토의해요</span>
+      <span id="score-display">문제 1 / 6</span>
+    </div>
+    <div class="main-stage">
+      <div class="board" id="game-board"></div>
+      <div class="quiz-area">
+        <div class="word-box" id="target-word">-</div>
+        <div class="options-wrapper" id="options-container"></div>
+      </div>
+    </div>
+    <div class="footer-bar" id="guide">알맞게 쓰인 블록을 찾아 눌러 봐! 줄이 차면 블록이 아래로 떨어져!</div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        word: "묶다", targetPos: [1, 0], options: [
+          { text: "[묵따]", isCorrect: true, color: "green", shape: [[0, 0], [0, 1], [1, 0], [1, 1]] },
+          { text: "[물따]", isCorrect: false, color: "purple", shape: [[0, 1], [1, 0], [1, 1], [1, 2]] }
+        ]
+      },
+      {
+        word: "삯", targetPos: [0, 1], options: [
+          { text: "[삿]", isCorrect: false, color: "green", shape: [[0, 0], [0, 1], [1, 1]] },
+          { text: "[삭]", isCorrect: true, color: "yellow", shape: [[0, 0], [0, 1], [1, 1], [2, 1]] }
+        ]
+      },
+      {
+        word: "버섯", targetPos: [0, 0], options: [
+          { text: "[버섯]", isCorrect: false, color: "yellow", shape: [[0, 0], [1, 0], [2, 0]] },
+          { text: "[버섣]", isCorrect: true, color: "blue", shape: [[0, 0], [1, 0], [1, 1], [2, 0]] }
+        ]
+      },
+      {
+        word: "곶감", targetPos: [0, 1], options: [
+          { text: "[곧깜]", isCorrect: true, color: "pink", shape: [[0, 0], [1, 0], [1, 1], [2, 1]] },
+          { text: "[곳깜]", isCorrect: false, color: "green", shape: [[0, 0], [0, 1], [1, 0], [1, 1]] }
+        ]
+      },
+      {
+        word: "앞", targetPos: [0, 1], options: [
+          { text: "[압]", isCorrect: true, color: "blue", shape: [[0, 1], [1, 0], [1, 1], [2, 1]] },
+          { text: "[얍]", isCorrect: false, color: "yellow", shape: [[1, 0], [1, 1], [1, 2]] }
+        ]
+      },
+      {
+        word: "무릎", targetPos: [0, 0], options: [
+          { text: "[무름]", isCorrect: false, color: "purple", shape: [[0, 1], [0, 2], [1, 0], [1, 1]] },
+          { text: "[무릅]", isCorrect: true, color: "green", shape: [[0, 0], [0, 1], [1, 0], [2, 0]] }
+        ]
+      }
+    ];
+
+    let currentIdx = 0;
+    let boardState = Array(3).fill().map(() => Array(3).fill(null));
+
+    function init() { drawBoard(); loadNext(); }
+
+    function drawBoard() {
+      const boardEl = document.getElementById('game-board');
+      boardEl.innerHTML = '';
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.id = `cell-${r}-${c}`;
+          if (boardState[r][c]) {
+            cell.style.backgroundColor = `var(--${boardState[r][c]})`;
+          }
+          boardEl.appendChild(cell);
+        }
+      }
+    }
+
+    function loadNext() {
+      if (currentIdx >= questions.length) {
+        document.getElementById('target-word').innerText = "성공!";
+        return;
+      }
+      const q = questions[currentIdx];
+      document.getElementById('target-word').innerText = q.word;
+      document.getElementById('score-display').innerText = `문제 ${currentIdx + 1} / 6`;
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const card = document.createElement('div');
+        card.className = 'option-card';
+        const maxR = Math.max(...opt.shape.map(s => s[0]));
+        const maxC = Math.max(...opt.shape.map(s => s[1]));
+        const grid = document.createElement('div');
+        grid.className = 'shape-grid';
+        grid.style.gridTemplateColumns = `repeat(${maxC + 1}, 25px)`;
+        for (let i = 0; i < (maxR + 1) * (maxC + 1); i++) {
+          const r = Math.floor(i / (maxC + 1)), c = i % (maxC + 1);
+          const isPart = opt.shape.some(s => s[0] === r && s[1] === c);
+          const unit = document.createElement('div');
+          unit.className = 'block-unit';
+          if (isPart) unit.style.backgroundColor = `var(--${opt.color})`;
+          else unit.style.visibility = 'hidden';
+          grid.appendChild(unit);
+        }
+        card.innerHTML = grid.outerHTML + `<div class="option-text">${opt.text}</div>`;
+        card.onclick = (e) => checkAnswer(opt, e.currentTarget);
+        container.appendChild(card);
+      });
+    }
+
+    function checkAnswer(opt, el) {
+      if (opt.isCorrect) {
+        const q = questions[currentIdx];
+        opt.shape.forEach(([dr, dc]) => {
+          const nr = q.targetPos[0] + dr;
+          const nc = q.targetPos[1] + dc;
+          if (nr >= 0 && nr < 3 && nc >= 0 && nc < 3) boardState[nr][nc] = opt.color;
+        });
+        drawBoard();
+        setTimeout(clearLines, 600);
+      } else {
+        el.classList.add('shake');
+        setTimeout(() => el.classList.remove('shake'), 300);
+      }
+    }
+
+    function clearLines() {
+      let fullLines = [];
+      for (let r = 0; r < 3; r++) {
+        if (boardState[r].every(c => c !== null)) fullLines.push(r);
+      }
+
+      if (fullLines.length > 0) {
+        fullLines.forEach(r => {
+          for (let c = 0; c < 3; c++) document.getElementById(`cell-${r}-${c}`).classList.add('clear-anim');
+        });
+
+        setTimeout(() => {
+          // [핵심] 꽉 찬 줄을 제외한 나머지만 남기고 맨 위에 빈 줄을 채움
+          let nextBoard = boardState.filter((_, idx) => !fullLines.includes(idx));
+          while (nextBoard.length < 3) {
+            nextBoard.unshift(Array(3).fill(null));
+          }
+          boardState = nextBoard;
+
+          drawBoard();
+          currentIdx++;
+          loadNext();
+        }, 500);
+      } else {
+        currentIdx++;
+        loadNext();
+      }
+    }
+    init();
+  </script>
+</body>
+
+</html>
